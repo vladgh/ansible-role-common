@@ -7,5 +7,15 @@ galaxy_info:
   license: Apache v2
   min_ansible_version: 2.4
   galaxy_tags: []
+  platforms:
+    - name: Ubuntu
+      versions:
+        - all
+    - name: Debian
+      versions:
+        - all
+    - name: Centos
+      versions:
+        - all
 
 dependencies: []
