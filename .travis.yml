@@ -4,21 +4,18 @@ env:
   global:
     - GIT_BRANCH="$TRAVIS_BRANCH" # Specify the branch name manually when on a detached HEAD
   matrix:
-    - DISTRIBUTION=ubuntu CODENAME=trusty
-    - DISTRIBUTION=ubuntu CODENAME=bionic
-    - DISTRIBUTION=ubuntu CODENAME=xenial
-    - DISTRIBUTION=debian CODENAME=jessie
-    - DISTRIBUTION=debian CODENAME=stretch
+    - DISTRIBUTION=ubuntu CODENAME=1404
+    - DISTRIBUTION=ubuntu CODENAME=1604
+    - DISTRIBUTION=ubuntu CODENAME=1804
+    - DISTRIBUTION=debian CODENAME=8
+    - DISTRIBUTION=debian CODENAME=9
     - DISTRIBUTION=centos CODENAME=6
     - DISTRIBUTION=centos CODENAME=7
 install:
   - sudo apt-get -qy update && sudo apt-get -qy -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" install docker-ce && docker --version
   - pip install --user --upgrade ansible && ansible --version
-before_script: |
-  docker pull "${DISTRIBUTION}:${CODENAME}"
-  docker build --no-cache --rm --file="tests/Dockerfile.${DISTRIBUTION}-${CODENAME}" --tag="${DISTRIBUTION}-${CODENAME}:ansible" tests
 script: |
-  CONTAINER_ID=$(docker run --detach --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro --volume="${PWD}:/ansible" "${DISTRIBUTION}-${CODENAME}:ansible")
+  CONTAINER_ID=$(docker run --detach --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro --volume="${PWD}:/ansible" "geerlingguy/docker-${DISTRIBUTION}${CODENAME}-ansible")
   docker exec -w /ansible "${CONTAINER_ID}" env ANSIBLE_FORCE_COLOR=1 ansible-galaxy install --roles-path roles --role-file requirements.yml
   docker exec -w /ansible "${CONTAINER_ID}" env ANSIBLE_FORCE_COLOR=1 ansible-playbook --verbose --inventory tests/inventory tests/test.yml --syntax-check
   docker exec -w /ansible "${CONTAINER_ID}" env ANSIBLE_RETRY_FILES_ENABLED=false ANSIBLE_FORCE_COLOR=1 ansible-playbook --verbose --inventory tests/inventory tests/test.yml
