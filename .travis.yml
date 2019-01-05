@@ -1,3 +1,4 @@
+---
 dist: xenial
 
 language: python
@@ -5,7 +6,7 @@ services: docker
 
 env:
   global:
-    - GIT_BRANCH: "$TRAVIS_BRANCH" # Specify the branch name manually when on a detached HEAD
+    - GIT_BRANCH: "$TRAVIS_BRANCH"  # Specify the branch name manually when on a detached HEAD
     - ROLE_NAME: common
   matrix:
     - MOLECULE_DISTRO: centos7
