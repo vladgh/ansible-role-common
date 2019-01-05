@@ -5,6 +5,10 @@
     name: ca-certificates
     state: present
   when: ansible_os_family == "Debian"
+  register: task_result
+  until: task_result is success
+  retries: 10
+  delay: 2
 
 - name: Ensure local certs directory exists
   file:
