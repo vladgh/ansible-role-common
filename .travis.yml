@@ -18,7 +18,7 @@ env:
 
 install:
   - sudo apt-get -qy update && sudo apt-get -qy -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" install docker-ce && docker --version
-  - pip install --user --upgrade molecule docker && molecule --version
+  - pip install molecule docker && molecule --version
 
 before_script:
   # Use actual Ansible Galaxy role name for the project directory.
