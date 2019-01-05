@@ -1,5 +1,6 @@
 ---
 galaxy_info:
+  role_name: common
   author: Vlad Ghinea
   description: Common Role
   company: VladGh.com
