@@ -1,0 +1,48 @@
+dist: xenial
+services: docker
+env:
+  global:
+    - GIT_BRANCH="$TRAVIS_BRANCH" # Specify the branch name manually when on a detached HEAD
+  matrix:
+    - DISTRIBUTION=ubuntu CODENAME=trusty
+    - DISTRIBUTION=ubuntu CODENAME=bionic
+    - DISTRIBUTION=ubuntu CODENAME=xenial
+    - DISTRIBUTION=debian CODENAME=jessie
+    - DISTRIBUTION=debian CODENAME=stretch
+    - DISTRIBUTION=centos CODENAME=6
+    - DISTRIBUTION=centos CODENAME=7
+install:
+  - sudo apt-get -qy update && sudo apt-get -qy -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" install docker-ce && docker --version
+  - pip install --user --upgrade ansible && ansible --version
+before_script: |
+  docker pull "${DISTRIBUTION}:${CODENAME}"
+  docker build --no-cache --rm --file="tests/Dockerfile.${DISTRIBUTION}-${CODENAME}" --tag="${DISTRIBUTION}-${CODENAME}:ansible" tests
+script: |
+  CONTAINER_ID=$(docker run --detach --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro --volume="${PWD}:/ansible" "${DISTRIBUTION}-${CODENAME}:ansible")
+  docker exec -w /ansible "${CONTAINER_ID}" env ANSIBLE_FORCE_COLOR=1 ansible-galaxy install --roles-path roles --role-file requirements.yml
+  docker exec -w /ansible "${CONTAINER_ID}" env ANSIBLE_FORCE_COLOR=1 ansible-playbook --verbose --inventory tests/inventory tests/test.yml --syntax-check
+  docker exec -w /ansible "${CONTAINER_ID}" env ANSIBLE_RETRY_FILES_ENABLED=false ANSIBLE_FORCE_COLOR=1 ansible-playbook --verbose --inventory tests/inventory tests/test.yml
+  docker exec -w /ansible "${CONTAINER_ID}" env ANSIBLE_RETRY_FILES_ENABLED=false ANSIBLE_FORCE_COLOR=1 ansible-playbook --verbose --inventory tests/inventory tests/test.yml
+  if docker exec -w /ansible "${CONTAINER_ID}" env ANSIBLE_RETRY_FILES_ENABLED=false ANSIBLE_FORCE_COLOR=1 ansible-playbook --verbose --inventory tests/inventory tests/test.yml | grep -q 'changed=0.*failed=0'; then
+    echo 'Idempotence test: pass' && exit 0
+  else
+    echo 'Idempotence test: fail' && exit 1
+  fi
+  docker rm -f "${CONTAINER_ID}" || true
+jobs:
+  include:
+    - stage: "Deploy"
+      if: branch = master AND type != pull_request
+      env: []
+      before_script: |
+        if [[ "$TRAVIS_BRANCH" == master && "$TRAVIS_PULL_REQUEST" == false ]]; then
+          . <( ( echo "$ENCRYPT_KEY" | base64 --decode ) |  gpg --batch --yes --decrypt --passphrase-fd 0 .env.gpg ) 2>/dev/null || true
+          echo "${DEPLOY_RSA:-}" | base64 --decode --ignore-garbage > ~/.ssh/deploy_rsa
+          chmod 600 ~/.ssh/deploy_rsa
+        fi
+      script: ./run deploy
+notifications:
+  webhooks:
+    urls: https://vbot.ghn.me/travis
+  slack:
+    secure: dBW75rTN7tGVXX3oJfAoFRQyEgtZOZbE0NgV+DuKjCaAmPNGVXt0/csto8OpD9+g1KhW0wGxiK96OuN7hEB9y+VXg157nRo87AgbRthIXk/FbHIkogv7fFY6krwtA+M7P6461YOqaNgGV8mNDh2WOU3LjLa3GQoLlEWxNyEfUd0luqtTetFSzE9cNoJnS78/M59/btZ2+PwwOgdrDLlMey+ZxO/FB8LHjB16gllB+LO3RaXFhJLQNTbkenu4uZ6KnbQiVhJSek72A0g1IS5K2c1DPe5Gb8urJ+7FkINGjdt6sUOTiC4cHLHrG3JSUzap9j9V+1+597WvBkUXmGfDT7hMxd/8uJM5Qik1y5KeAGBk/thahaqXXuV4i8wO0unBZZIoZ9yu16/of92ysZXWb095O589SH+/ethiEUO/2AzEk+nhkdOKBtaIq3e7GhW6Os1l2Gip6bHNVrRCclf1JkBCPiPtnqESTvB4QMv3hTua1NC7wJlpFd8luvL9vYLvITmOAgzPxnOH+R3R20wT+YCZd6DC7b3e3RtlZkQ+BnUTvlzMdaVE4LMQegMgfQ6CXevV1F3hli/hyWagf4MHYFKLrqA0IUaCkVd56/+17/vWmS5iyvmnCg7LKObFxDojzwii1fxU94tlz8TSs/8C4FN2qeMkltcFpsIAOCOsW9c=
