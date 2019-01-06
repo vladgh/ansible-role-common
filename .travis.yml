@@ -1,31 +1,24 @@
 ---
-dist: xenial
-
 language: python
 services: docker
 
 env:
   global:
-    - GIT_BRANCH: "$TRAVIS_BRANCH"  # Specify the branch name manually when on a detached HEAD
     - ROLE_NAME: common
   matrix:
-    - MOLECULE_DISTRO: centos7
-    - MOLECULE_DISTRO: centos6
     - MOLECULE_DISTRO: ubuntu1804
     - MOLECULE_DISTRO: ubuntu1604
     - MOLECULE_DISTRO: ubuntu1404
     - MOLECULE_DISTRO: debian9
     - MOLECULE_DISTRO: debian8
+    - MOLECULE_DISTRO: centos7
+    - MOLECULE_DISTRO: centos6
 
 install:
   - sudo apt-get -qy update && sudo apt-get -qy -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" install docker-ce && docker --version
   - pip install molecule docker && molecule --version
 
-before_script:
-  # Use actual Ansible Galaxy role name for the project directory.
-  - cd ../
-  - mv ansible-role-$ROLE_NAME vladgh.$ROLE_NAME
-  - cd vladgh.$ROLE_NAME
+before_script: cd ../ && mv ansible-role-$ROLE_NAME vladgh.$ROLE_NAME && cd vladgh.$ROLE_NAME
 
 script:
   # Run tests.
