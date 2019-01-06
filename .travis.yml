@@ -20,9 +20,7 @@ install:
 
 before_script: cd ../ && mv ansible-role-$ROLE_NAME vladgh.$ROLE_NAME && cd vladgh.$ROLE_NAME
 
-script:
-  # Run tests.
-  - molecule test
+script: molecule test
 
 notifications:
   webhooks:
