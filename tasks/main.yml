@@ -1,5 +1,26 @@
 ---
 # Common tasks
 - import_tasks: apt.yml
+
+# Software
+- name: Install essential software (Debian/Ubuntu)
+  apt:
+    name: "{{ debian_software }}"
+    state: present
+  when: ansible_os_family == "Debian" and debian_software is defined
+  register: task_result
+  until: task_result is success
+  retries: 10
+  delay: 2
+- name: Install essential software (RedHat/CentOS)
+  package:
+    name: "{{ redhat_software }}"
+    state: present
+  when: ansible_os_family == "RedHat”" and redhat_software is defined
+  register: task_result
+  until: task_result is success
+  retries: 10
+  delay: 2
+
 - import_tasks: accounts.yml
 - import_tasks: ca.yml

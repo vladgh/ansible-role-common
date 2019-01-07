@@ -11,14 +11,3 @@
     repo: "{{ item.repo }}"
   with_items: "{{ apt_repositories }}"
   when: ansible_distribution == 'Ubuntu' and apt_repositories is defined
-
-# Software
-- name: Install all necessary software with APT
-  apt:
-    name: "{{ software }}"
-    state: present
-  when: ansible_os_family == "Debian" and software is defined
-  register: task_result
-  until: task_result is success
-  retries: 10
-  delay: 2
