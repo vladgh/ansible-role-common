@@ -11,7 +11,7 @@
   delay: 2
 
 - name: Install ca-certificates package (RedHat/CentOS)
-  apt:
+  yum:
     name: ca-certificates
     state: present
   when: ansible_os_family == "RedHat"
@@ -20,9 +20,13 @@
   retries: 10
   delay: 2
 
-- name: Enable dynamic CA configuration on rhel6
+- name: Enable dynamic CA configuration on RedHat/CentOS < 7
   shell: /bin/update-ca-trust enable
-  when: ansible_os_family == "RedHat" and ansible_distribution_major_version|int == 6
+  when: ansible_os_family == "RedHat" and ansible_distribution_major_version|int < 7
+
+- name: Enable dynamic CA configuration on RedHat/CentOS
+  shell: /bin/update-ca-trust
+  when: ansible_os_family == "RedHat"
 
 - name: Ensure local certs directory exists
   file:
