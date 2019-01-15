@@ -1,1 +1,4 @@
 ---
+ca_path:
+  Debian: /usr/local/share/ca-certificates
+  RedHat: /etc/pki/ca-trust/source/anchors

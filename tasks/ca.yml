@@ -1,6 +1,6 @@
 ---
 # Add extra CA Certificates
-- name: Install ca-certificates package on debian systems
+- name: Install ca-certificates package (Debian/Ubuntu)
   apt:
     name: ca-certificates
     state: present
@@ -10,19 +10,34 @@
   retries: 10
   delay: 2
 
+- name: Install ca-certificates package (RedHat/CentOS)
+  apt:
+    name: ca-certificates
+    state: present
+  when: ansible_os_family == "RedHat"
+  register: task_result
+  until: task_result is success
+  retries: 10
+  delay: 2
+
+- name: Enable dynamic CA configuration on rhel6
+  shell: /bin/update-ca-trust enable
+  when: ansible_os_family == "RedHat" and ansible_distribution_major_version|int == 6
+
 - name: Ensure local certs directory exists
   file:
     state: directory
-    path: /usr/local/share/ca-certificates
+    path: "{{ ca_path[ansible_os_family] }}/"
 
 - name: Install CA Certificates
   copy:
     src: "{{ item }}"
-    dest: /usr/local/share/ca-certificates/
+    dest: "{{ ca_path[ansible_os_family] }}/"
     owner: root
     group: root
     mode: 0644
   with_fileglob:
-    - "ca/*"
+    - ca/*
   notify:
-    - Update trusted CA certificates Debian
+    - Update trusted CA certificates (Debian/Ubuntu)
+    - Update trusted CA certificates (RedHat/CentOS)
