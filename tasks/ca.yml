@@ -20,14 +20,6 @@
   retries: 10
   delay: 2
 
-- name: Enable dynamic CA configuration on RedHat/CentOS < 7
-  shell: /bin/update-ca-trust enable
-  when: ansible_os_family == "RedHat" and ansible_distribution_major_version|int < 7
-
-- name: Enable dynamic CA configuration on RedHat/CentOS
-  shell: /bin/update-ca-trust
-  when: ansible_os_family == "RedHat" and ansible_distribution_major_version|int >= 7
-
 - name: Ensure local certs directory exists
   file:
     state: directory
@@ -45,3 +37,12 @@
   notify:
     - Update trusted CA certificates (Debian/Ubuntu)
     - Update trusted CA certificates (RedHat/CentOS)
+  register: install_result
+
+- name: Enable dynamic CA configuration on RedHat/CentOS < 7
+  shell: update-ca-trust enable
+  when: install_result | changed and ansible_os_family == "RedHat" and ansible_distribution_major_version|int < 7
+
+- name: Enable dynamic CA configuration on RedHat/CentOS >= 7
+  shell: update-ca-trust
+  when: install_result | changed and ansible_os_family == "RedHat" and ansible_distribution_major_version|int >= 7
