@@ -1,13 +1,19 @@
 ---
+# Services
 - name: Restart SSH Daemon
   service:
     name: sshd
     state: restarted
 
+# CA Certificates
 - name: Update trusted CA certificates (Debian/Ubuntu)
   command: /usr/sbin/update-ca-certificates --fresh
   when: ansible_os_family == "Debian"
 
-- name: Update trusted CA certificates (RedHat/CentOS)
-  command: /bin/update-ca-trust
-  when: ansible_os_family == "RedHat"
+- name: Update trusted CA certificates (RedHat/CentOS < 7)
+  shell: /usr/bin/update-ca-trust enable
+  when: ansible_os_family == "RedHat" and ansible_distribution_major_version|int < 7
+
+- name: Update trusted CA certificates (RedHat/CentOS >= 7)
+  shell: /usr/bin/update-ca-trust
+  when: ansible_os_family == "RedHat" and ansible_distribution_major_version|int >= 7
