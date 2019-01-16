@@ -11,9 +11,9 @@
   when: ansible_os_family == "Debian"
 
 - name: Update trusted CA certificates (RedHat/CentOS < 7)
-  shell: /usr/bin/update-ca-trust enable
+  command: /usr/bin/update-ca-trust enable
   when: ansible_os_family == "RedHat" and ansible_distribution_major_version|int < 7
 
 - name: Update trusted CA certificates (RedHat/CentOS >= 7)
-  shell: /usr/bin/update-ca-trust
+  command: /usr/bin/update-ca-trust
   when: ansible_os_family == "RedHat" and ansible_distribution_major_version|int >= 7
