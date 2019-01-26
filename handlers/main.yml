@@ -4,6 +4,10 @@
   service:
     name: sshd
     state: restarted
+- name: Restart LoginD
+  service:
+    name: systemd-logind
+    state: restarted
 
 # CA Certificates
 - name: Update trusted CA certificates (Debian/Ubuntu)

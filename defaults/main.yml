@@ -1,4 +1,8 @@
 ---
+# CA Certificates Paths
 ca_path:
   Debian: /usr/local/share/ca-certificates
   RedHat: /etc/pki/ca-trust/source/anchors
+
+# Set to true to disable lid switch on laptops.
+disable_lid_switch: false

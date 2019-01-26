@@ -1,0 +1,9 @@
+---
+# Miscelanous
+- name: Disable lid switch
+  lineinfile:
+    dest: /etc/systemd/logind.conf
+    regexp: HandleLidSwitch
+    line: 'HandleLidSwitch=lock'
+  notify: Restart LoginD
+  when: disable_lid_switch

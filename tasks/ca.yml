@@ -1,29 +1,14 @@
 ---
-# Add extra CA Certificates
-- name: Install ca-certificates package (Debian/Ubuntu)
-  apt:
+# Adds  extra CA Certificates
+- name: Install ca-certificates package
+  package:
     name: ca-certificates
     state: present
-  when: ansible_os_family == "Debian"
-  register: task_result
-  until: task_result is success
-  retries: 10
-  delay: 2
 
-- name: Install ca-certificates package (RedHat/CentOS)
-  yum:
-    name: ca-certificates
-    state: present
-  when: ansible_os_family == "RedHat"
-  register: task_result
-  until: task_result is success
-  retries: 10
-  delay: 2
-
-- name: Ensure local certs directory exists
+- name: Ensure certificates directory exists
   file:
-    state: directory
     path: "{{ ca_path[ansible_os_family] }}/"
+    state: directory
 
 - name: Install CA Certificates
   copy:
