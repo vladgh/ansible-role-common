@@ -26,3 +26,4 @@
 
 - import_tasks: accounts.yml
 - import_tasks: ca.yml
+- import_tasks: misc.yml
