@@ -1,5 +1,7 @@
 ---
-- hosts: localhost
+- name: Ansible Tests
+  hosts: localhost
+  connection: local
   remote_user: root
   roles:
     - common
