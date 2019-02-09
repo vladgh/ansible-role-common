@@ -1,0 +1,28 @@
+---
+# MSMTP
+- name: Install MSMTP and MailX (Debian/Ubuntu)
+  apt:
+    name:
+      - msmtp
+      - msmtp-mta
+      - mailutils
+    state: present
+    update_cache: yes
+  when: ansible_os_family == "Debian"
+- name: Install MSMTP and MailX (RedHat/CentOS)
+  yum:
+    name:
+      - msmtp
+      - msmtp-mta
+      - mailx
+    state: present
+    update_cache: yes
+  when: ansible_os_family == "RedHat"
+- name: Configure MSMTP
+  template:
+    src: etc/msmtprc.j2
+    dest: /etc/msmtprc
+- name: Configure aliases
+  template:
+    src: etc/aliases.j2
+    dest: /etc/aliases
