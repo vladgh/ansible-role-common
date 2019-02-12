@@ -9,6 +9,30 @@ disable_lid_switch: false
 
 # MSMTP relay
 msmtp_enabled: false  # Set to true to enable
+## Logging (Select A) "syslog" or B) "file" logging or C) "no" log
+msmtp_log: "syslog"
+# msmtp_logfile: /var/log/msmtp.log
+## Accounts
+# msmtp_accounts:
+#   - account: "GMail"
+#     host: "smtp.gmail.com"
+#     port: 587
+#     auth: "on"
+#     user: "example@gmail.example"
+#     password: "some password"
+#   - account: "mysmtp"
+#     host: "smtp.example"
+#     port: 587
+#     auth: "on"
+#     user: "myuser"
+#     password: "123456"
+msmtp_default_account: "GMail"
+msmtp_from: "My Org"
+## Aliases mail account ( only msmtp_alias_default is required the rest is optional )
+msmtp_alias_default: user@example.com
+# msmtp_alias_root: root@example.com
+# msmtp_alias_cron: cron@example.com
+
 
 # Remote logs
 remote_logs_enabled: false  # Set to true to enable
