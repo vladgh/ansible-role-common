@@ -4,6 +4,7 @@
   apt:
     name:
       - msmtp
+      - msmtp-mta
       - mailutils
     state: present
     update_cache: yes
@@ -12,6 +13,7 @@
   yum:
     name:
       - msmtp
+      - msmtp-mta
       - mailx
     state: present
     update_cache: yes

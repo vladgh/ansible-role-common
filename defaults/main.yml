@@ -32,7 +32,10 @@ msmtp_from: "My Org"
 msmtp_alias_default: user@example.com
 # msmtp_alias_root: root@example.com
 # msmtp_alias_cron: cron@example.com
-
+## Other
+msmtp_ca_certificates:
+  Debian: /etc/ssl/certs/ca-certificates.crt
+  RedHat: /etc/ssl/certs/ca-bundle.crt
 
 # Remote logs
 remote_logs_enabled: false  # Set to true to enable
