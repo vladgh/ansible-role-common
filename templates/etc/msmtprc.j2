@@ -19,18 +19,14 @@ logfile {{msmtp_logfile}}
 {% endif %}
 {% endif %}
 
-{% if msmtp_from is defined %}
-from {{msmtp_from}}
-keepbcc on
-{% endif %}
-
 {% if msmtp_accounts is defined %}
 # Account settings
 {% for msmtp_account in msmtp_accounts %}
 account {{msmtp_account.account}}
 host {{msmtp_account.host}}
 port {{msmtp_account.port}}
-auth {{msmtp_account.auth}}
+auth {{msmtp_account.from}}
+from {{msmtp_account.user}}
 user {{msmtp_account.user}}
 password {{msmtp_account.password}}
 {% endfor %}
