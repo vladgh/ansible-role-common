@@ -7,5 +7,9 @@ ca_path:
 # Set to true to disable lid switch on laptops.
 disable_lid_switch: false
 
-# Set to true to enable MSMTP relay
-msmtp_enabled: false
+# MSMTP relay
+msmtp_enabled: false  # Set to true to enable
+
+# Remote logs
+remote_logs_enabled: false  # Set to true to enable
+remote_logs_server: logs.ghn.me

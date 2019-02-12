@@ -8,6 +8,10 @@
   service:
     name: systemd-logind
     state: restarted
+- name: Restart RSysLog
+  service:
+    name: rsyslog
+    state: restarted
 
 # CA Certificates
 - name: Update trusted CA certificates (Debian/Ubuntu)

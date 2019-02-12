@@ -28,5 +28,8 @@
 - import_tasks: ca.yml
 - import_tasks: misc.yml
 
+- import_tasks: logs.yml
+  when: remote_logs_enabled
+
 - import_tasks: msmtp.yml
   when: msmtp_enabled
