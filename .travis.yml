@@ -1,7 +1,6 @@
----
+dist: xenial
 language: python
 services: docker
-
 env:
   global:
     - ROLE_NAME: common
@@ -13,15 +12,11 @@ env:
     - MOLECULE_DISTRO: debian8
     - MOLECULE_DISTRO: centos7
     - MOLECULE_DISTRO: centos6
-
 install:
   - sudo apt-get -qy update && sudo apt-get -qy -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" install docker-ce && docker --version
   - pip install molecule docker && molecule --version
-
 before_script: cd ../ && mv ansible-role-$ROLE_NAME vladgh.$ROLE_NAME && cd vladgh.$ROLE_NAME
-
 script: molecule test
-
 notifications:
   webhooks:
     - https://vbot.ghn.me/travis
