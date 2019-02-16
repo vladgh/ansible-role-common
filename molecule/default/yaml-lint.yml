@@ -1,4 +1,6 @@
 ---
+ignore: |
+  .travis.yml
 extends: default
 rules:
   line-length: disable
