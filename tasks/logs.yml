@@ -6,14 +6,7 @@
   with_items:
     - rsyslog
     - rsyslog-gnutls
-- name: Target ca-certificate store file
-  set_fact:
-    ca_bundle_cert_path: |-
-      {% if ansible_os_family == 'Debian' -%}
-      /etc/ssl/certs/ca-certificates.crt
-      {%- elif ansible_os_family == "RedHat" -%}
-      /etc/ssl/certs/ca-bundle.crt
-      {%- endif %}
+
 - name: Configure RSysLog
   template:
     src: "etc/rsyslog.d/{{ remote_logs_server }}.conf.j2"

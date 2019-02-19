@@ -7,13 +7,13 @@
 
 - name: Ensure certificates directory exists
   file:
-    path: "{{ ca_path[ansible_os_family] }}/"
+    path: "{{ ca_path }}/"
     state: directory
 
 - name: Install CA Certificates
   copy:
     src: "{{ item }}"
-    dest: "{{ ca_path[ansible_os_family] }}/"
+    dest: "{{ ca_path }}/"
     owner: root
     group: root
     mode: 0644
