@@ -31,7 +31,10 @@
 # SSH authorized keys
 - name: Add authorized keys
   authorized_key:
-    user: "{{ item.name }}"
-    key: "{{ item.authorized_key }}"
+    user: "{{ item.0.name }}"
+    key: "{{ item.1 }}"
   when: accounts is defined and accounts.authorized_keys is defined
-  with_items: "{{ accounts.authorized_keys }}"
+  with_subelements:
+    - "{{accounts}}"
+    - authorized_keys
+    - skip_missing: yes
