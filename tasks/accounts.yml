@@ -33,5 +33,5 @@
   authorized_key:
     user: "{{ item.name }}"
     key: "{{ item.authorized_key }}"
-  when: accounts is defined and item.authorized_key is defined
-  with_items: "{{ accounts }}"
+  when: accounts is defined and accounts.authorized_keys is defined
+  with_items: "{{ accounts.authorized_keys }}"
