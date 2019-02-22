@@ -21,6 +21,7 @@
   until: task_result is success
   retries: 10
   delay: 2
+
 - name: Install essential software (RedHat/CentOS)
   yum:
     name: "{{ redhat_software }}"

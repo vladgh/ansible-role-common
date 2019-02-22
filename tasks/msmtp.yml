@@ -1,10 +1,11 @@
 ---
-# MSMTP
+# MSMTP Relay Server
 - name: Install CA Certificates
   package:
     name:
       - ca-certificates
     state: present
+
 - name: Install MSMTP and MailX (Debian/Ubuntu)
   apt:
     name:
@@ -14,6 +15,7 @@
     state: present
     update_cache: yes
   when: ansible_os_family == "Debian"
+
 - name: Install MSMTP and MailX (RedHat/CentOS)
   yum:
     name:
@@ -22,14 +24,17 @@
     state: present
     update_cache: yes
   when: ansible_os_family == "RedHat"
+
 - name: Configure MSMTP
   template:
     src: etc/msmtprc.j2
     dest: /etc/msmtprc
+
 - name: Configure aliases
   template:
     src: etc/aliases.j2
     dest: /etc/aliases
+
 - name: Setup alternatives for MTA
   alternatives:
     name: mta

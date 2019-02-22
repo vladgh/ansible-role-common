@@ -4,10 +4,12 @@
   service:
     name: sshd
     state: restarted
+
 - name: Restart LoginD
   service:
     name: systemd-logind
     state: restarted
+
 - name: Restart RSysLog
   service:
     name: rsyslog
