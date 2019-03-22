@@ -35,6 +35,6 @@
     key: "{{ item.1 }}"
   when: accounts is defined
   with_subelements:
-    - "{{accounts}}"
+    - "{{ accounts }}"
     - authorized_keys
     - skip_missing: yes
