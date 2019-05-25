@@ -6,4 +6,4 @@
     regexp: HandleLidSwitch
     line: 'HandleLidSwitch=lock'
   notify: Restart LoginD
-  when: disable_lid_switch
+  when: disable_lid_switch|bool

@@ -16,6 +16,7 @@
     name: "{{ debian_software }}"
     state: present
     update_cache: yes
+    upgrade: yes
   when: ansible_os_family == "Debian" and debian_software is defined
   register: task_result
   until: task_result is success
@@ -38,7 +39,7 @@
 - import_tasks: misc.yml
 
 - import_tasks: logs.yml
-  when: remote_logs_enabled
+  when: remote_logs_enabled|bool
 
 - import_tasks: msmtp.yml
-  when: msmtp_enabled
+  when: msmtp_enabled|bool
