@@ -3,7 +3,7 @@
 remote_logs_enabled: false  # Set to true to enable
 remote_logs_server: logs.example.com
 remote_logs_port: 10514
-remote_logs_pprotocol: tcp
+remote_logs_protocol: tcp
 
 # MSMTP relay
 msmtp_enabled: false  # Set to true to enable
