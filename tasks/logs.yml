@@ -13,4 +13,3 @@
     dest: "/etc/rsyslog.d/00_{{ remote_logs_server }}.conf"
   notify:
     - Restart RSysLog
-  when: remote_logs_server is defined

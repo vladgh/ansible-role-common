@@ -15,8 +15,8 @@ $ActionFileDefaultTemplate RSYSLOG_TraditionalFileFormat
 $DefaultNetstreamDriver gtls
 $ActionSendStreamDriverMode 1
 $ActionSendStreamDriverAuthMode x509/name
-$ActionSendStreamDriverPermittedPeer logs.ghn.me
+$ActionSendStreamDriverPermittedPeer {{ remote_logs_server }}
 $DefaultNetStreamDriverCAFile {{ ca_bundle_cert_path }}
 
 # Sending all logs to logs.ghn.me via TCP on 10514 using the default format.
-*.* @@logs.ghn.me:10514
+*.* action(type="omfwd" target="{{ remote_logs_server }}" port="{{ remote_logs_port }}" protocol="{{ remote_logs_protocol }}")

@@ -1,40 +1,39 @@
 ---
-# Set to true to disable lid switch on laptops.
-disable_lid_switch: false
+# Remote logs
+remote_logs_enabled: false  # Set to true to enable
+remote_logs_server: logs.example.com
+remote_logs_port: 10514
+remote_logs_pprotocol: tcp
 
 # MSMTP relay
 msmtp_enabled: false  # Set to true to enable
-
 ## Logging (Select A) "syslog" or B) "file" logging or C) "no" log
 msmtp_log: syslog
-# msmtp_logfile: /var/log/msmtp.log
-
+msmtp_logfile: /var/log/msmtp.log
 ## Accounts
-# msmtp_accounts:
-#   - account: GMail
-#     host: smtp.gmail.com
-#     port: 587
-#     auth: on
-#     from: me
-#     user: example@gmail.example
-#     password: 123456
-#   - account: mysmtp
-#     host: smtp.example
-#     port: 587
-#     auth: on
-#     from: me
-#     user: myuser
-#     password: 123456
+msmtp_accounts:
+  - account: GMail
+    host: smtp.gmail.com
+    port: 587
+    auth: on
+    from: me
+    user: example@gmail.example
+    password: 123456
+  - account: mysmtp
+    host: smtp.example
+    port: 587
+    auth: on
+    from: me
+    user: myuser
+    password: 123456
 msmtp_default_account: GMail
-
 ## Aliases mail account ( only msmtp_alias_default is required the rest is optional )
 msmtp_alias_default: user@example.com
-# msmtp_alias_root: root@example.com
-# msmtp_alias_cron: cron@example.com
-
+msmtp_alias_root: root@example.com
+msmtp_alias_cron: cron@example.com
 ## Other
 msmtp_ca_certificates_bundle: "{{ ca_bundle_cert_path }}"
 
-# Remote logs
-remote_logs_enabled: false  # Set to true to enable
-remote_logs_server: logs.ghn.me
+# Miscellaneous
+## Set to true to disable lid switch on laptops.
+disable_lid_switch: false
