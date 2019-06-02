@@ -12,13 +12,6 @@ msmtp_log: syslog
 msmtp_logfile: /var/log/msmtp.log
 ## Accounts
 msmtp_accounts:
-  - account: GMail
-    host: smtp.gmail.com
-    port: 587
-    auth: on
-    from: me
-    user: example@gmail.example
-    password: 123456
   - account: mysmtp
     host: smtp.example
     port: 587
@@ -29,8 +22,8 @@ msmtp_accounts:
 msmtp_default_account: GMail
 ## Aliases mail account ( only msmtp_alias_default is required the rest is optional )
 msmtp_alias_default: user@example.com
-msmtp_alias_root: root@example.com
-msmtp_alias_cron: cron@example.com
+msmtp_alias_root: "{{ msmtp_alias_default }}"
+msmtp_alias_cron: "{{ msmtp_alias_default }}"
 ## Other
 msmtp_ca_certificates_bundle: "{{ ca_bundle_cert_path }}"
 
