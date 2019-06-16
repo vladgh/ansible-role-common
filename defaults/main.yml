@@ -10,18 +10,8 @@ msmtp_enabled: false  # Set to true to enable
 ## Logging (Select A) "syslog" or B) "file" logging or C) "no" log
 msmtp_log: syslog
 msmtp_logfile: /var/log/msmtp.log
-## Accounts
-msmtp_accounts:
-  - account: mysmtp
-    host: smtp.example
-    port: 587
-    auth: on
-    from: me
-    user: myuser
-    password: 123456
-msmtp_default_account: GMail
 ## Aliases mail account ( only msmtp_alias_default is required the rest is optional )
-msmtp_alias_default: user@example.com
+msmtp_alias_default: root
 msmtp_alias_root: "{{ msmtp_alias_default }}"
 msmtp_alias_cron: "{{ msmtp_alias_default }}"
 ## Other
