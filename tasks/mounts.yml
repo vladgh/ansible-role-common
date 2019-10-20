@@ -1,0 +1,9 @@
+---
+- name: Mount Points
+  mount:
+    path: "{{ item.path }}"
+    src: "{{ item.src }}"
+    fstype: "{{ item.fstype }}"
+    state: "{{ item.state }}"
+  when: mount_points is defined
+  with_items: "{{ mount_points }}"

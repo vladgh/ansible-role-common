@@ -35,6 +35,7 @@
 
 - import_tasks: accounts.yml
 - import_tasks: ca.yml
+- import_tasks: mounts.yml
 - import_tasks: misc.yml
 
 - import_tasks: logs.yml

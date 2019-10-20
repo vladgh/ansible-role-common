@@ -73,6 +73,19 @@ apt_repositories:
 - `msmtp_alias_cron`: The cron alias (defaults to `msmtp_alias_default`)
 - `msmtp_ca_certificates_bundle`: The path for the certificates bundle (default to system's CA Certificates Paths; see `vars/OS_FAMILY.yml`)
 
+### Extra mount points
+
+Check <https://docs.ansible.com/ansible/latest/modules/mount_module.html> for a complete list of parameters
+
+```yaml
+mount_points:
+  - name: MyBackup
+    path: /data/backup
+    src: UUID=1234-1234-1234-1234-1234
+    fstype: ext4
+    state: mounted
+```
+
 ### Miscellaneous
 
 - `disable_lid_switch`: Set to true to disable lid switch on laptops (defaults to `false`)
