@@ -19,7 +19,7 @@ Available variables are listed below, along with default values (see defaults/ma
 
 ### User accounts
 
-Check https://docs.ansible.com/ansible/latest/modules/user_module.html for a complete list of parameters
+Check <https://docs.ansible.com/ansible/latest/modules/user_module.html> for a complete list of parameters
 
 ```yaml
 accounts:
@@ -35,7 +35,7 @@ accounts:
 
 ### Extra APT repositories on Debian systems
 
-Check https://docs.ansible.com/ansible/latest/modules/apt_repository_module.html for a complete list of parameters
+Check <https://docs.ansible.com/ansible/latest/modules/apt_repository_module.html> for a complete list of parameters
 
 ```yaml
 apt_repositories:
