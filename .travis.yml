@@ -7,13 +7,10 @@ env:
   matrix:
     - MOLECULE_DISTRO: ubuntu:18.04
     - MOLECULE_DISTRO: ubuntu:16.04
-    - MOLECULE_DISTRO: ubuntu:14.04
     - MOLECULE_DISTRO: debian:10
     - MOLECULE_DISTRO: debian:9
-    - MOLECULE_DISTRO: debian:8
     - MOLECULE_DISTRO: centos:8
     - MOLECULE_DISTRO: centos:7
-    - MOLECULE_DISTRO: centos:6
 install:
   - sudo apt-get -qy update && sudo apt-get -qy -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" install docker-ce && docker --version
   - pip install molecule docker && molecule --version
