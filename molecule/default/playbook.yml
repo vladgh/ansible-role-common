@@ -19,8 +19,8 @@
         repo: ppa:git-core/ppa
     mount_points:
       - name: Test mount point
-        path: /tmp/mnt-pnt
-        src: /home
+        path: test_mount
+        src: files
         opts: bind
         state: mounted
         fstype: none
