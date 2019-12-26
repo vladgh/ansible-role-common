@@ -6,10 +6,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      MOLECULE_DISTRO: ${{ matrix.distro }}
+      MOLECULE_DISTRO: ${{ matrix.os }}
     strategy:
       matrix:
-        distro:
+        os:
           - ubuntu:16.04
           - ubuntu:18.04
           - debian:9
@@ -18,11 +18,11 @@ jobs:
           - centos:8
     steps:
     - uses: actions/checkout@v2
-      with:
-        path: vladgh.common
     - name: Set up Python
       uses: actions/setup-python@v1
     - name: Install dependencies
-      run: pip install --upgrade pip ansible molecule docker testinfra flake8 paramiko
-    - name: Test
-      run: cd vladgh.common && molecule test
+      run: pip install molecule docker
+    - name: Rename module folder
+      run: cd ../ && mv ansible-role-common vladgh.common
+    - name: Test with Molecule
+      run: molecule test
