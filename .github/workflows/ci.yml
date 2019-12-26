@@ -23,6 +23,6 @@ jobs:
     - name: Install dependencies
       run: pip install molecule docker
     - name: Rename module folder
-      run: cd ../ && mv ansible-role-common vladgh.common
+      run: cd ../ && mv ansible-role-common vladgh.common && cd vladgh.common
     - name: Test with Molecule
       run: molecule test
