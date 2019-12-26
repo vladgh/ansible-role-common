@@ -1,6 +1,6 @@
 ---
 ignore: |
-  .travis.yml
+  .github/
 extends: default
 rules:
   line-length: disable
