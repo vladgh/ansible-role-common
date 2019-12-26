@@ -3,7 +3,8 @@ name: CI
 on: [push, pull_request]
 
 jobs:
-  build:
+  # Run tests
+  test:
     runs-on: ubuntu-latest
     env:
       MOLECULE_DISTRO: ${{ matrix.distro }}
@@ -26,3 +27,15 @@ jobs:
       run: pip install molecule docker
     - name: Test
       run: cd vladgh.common && molecule test
+  # Push role to Ansible Galaxy
+  push:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+    steps:
+    - name: Set up Python
+      uses: actions/setup-python@v1
+    - name: Install dependencies
+      run: pip install ansible
+    - name: Deploy
+      run: ansible-galaxy role import --role-name vladgh.com --api-key ${{ secrets.ANSIBLE_GALAXY_API_KEY }} vladgh ansible-role-common
