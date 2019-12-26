@@ -13,7 +13,5 @@ jobs:
       uses: actions/setup-python@v1
     - name: Install dependencies
       run: pip install --upgrade pip ansible molecule docker testinfra flake8
-    - run: ls -lah ./
-    - run: ls -lah ./vladgh.common
     - name: Test
-      run: molecule test
+      run: cd vladgh.common && molecule test
