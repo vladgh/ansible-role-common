@@ -1,0 +1,41 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  # Run tests
+  test:
+    runs-on: ubuntu-latest
+    env:
+      MOLECULE_DISTRO: ${{ matrix.distro }}
+    strategy:
+      matrix:
+        distro:
+          - ubuntu:16.04
+          - ubuntu:18.04
+          - debian:9
+          - debian:10
+          - centos:7
+          - centos:8
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        path: vladgh.common
+    - name: Set up Python
+      uses: actions/setup-python@v1
+    - name: Install dependencies
+      run: pip install molecule docker
+    - name: Test
+      run: cd vladgh.common && molecule test
+  # Push role to Ansible Galaxy
+  push:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+    steps:
+    - name: Set up Python
+      uses: actions/setup-python@v1
+    - name: Install dependencies
+      run: pip install ansible
+    - name: Deploy
+      run: ansible-galaxy role import --role-name vladgh.com --api-key ${{ secrets.ANSIBLE_GALAXY_API_KEY }} vladgh ansible-role-common

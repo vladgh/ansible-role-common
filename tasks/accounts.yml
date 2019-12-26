@@ -16,7 +16,7 @@
     validate: 'visudo -cf %s'
 
 # User accounts
-- name: Create user accounts
+- name: Create user
   user:
     name: "{{ item.name }}"
     comment: "{{ item.comment | default(omit) }}"

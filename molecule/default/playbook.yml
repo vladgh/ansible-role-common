@@ -1,15 +1,21 @@
 ---
 - name: Converge
   hosts: all
-  become: true
-  pre_tasks:
-    - name: Update apt cache.
-      apt: update_cache=yes cache_valid_time=600
-      when: ansible_os_family == 'Debian'
-      changed_when: false
-      register: task_result
-      until: task_result is success
-      retries: 10
-      delay: 2
+  vars:
+    remote_logs_enabled: true
+    msmtp_enabled: true
+    disable_lid_switch: true
+    accounts:
+      - name: test
+        comment: Testing Account
+        authorized_keys:
+          - ssh-ed25519 AAAA testing
+    debian_software:
+      - curl
+    redhat_software:
+      - curl
+    apt_repositories:
+      - name: GIT
+        repo: ppa:git-core/ppa
   roles:
     - role: vladgh.common

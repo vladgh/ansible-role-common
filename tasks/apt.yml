@@ -6,6 +6,10 @@
     state: present
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_version >= '16.04'
 
+- name: Ensure GnuPG package is installed
+  package:
+    name: gnupg2
+
 - name: Add extra APT repositories
   apt_repository:
     repo: "{{ item.repo }}"

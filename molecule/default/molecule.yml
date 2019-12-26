@@ -9,15 +9,13 @@ lint:
     config-file: molecule/default/yaml-lint.yml
 platforms:
   - name: instance
-    image: "${MOLECULE_DISTRO:-ubuntu:18.04}"
+    image: "${MOLECULE_DISTRO:-ubuntu:latest}"
 provisioner:
   name: ansible
   lint:
     name: ansible-lint
   playbooks:
     converge: ${MOLECULE_PLAYBOOK:-playbook.yml}
-scenario:
-  name: default
 verifier:
   name: testinfra
   lint:
