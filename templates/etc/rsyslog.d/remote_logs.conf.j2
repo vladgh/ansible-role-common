@@ -18,5 +18,5 @@ $ActionSendStreamDriverAuthMode x509/name
 $ActionSendStreamDriverPermittedPeer {{ remote_logs_server }}
 $DefaultNetStreamDriverCAFile {{ ca_bundle_cert_path }}
 
-# Sending all logs to logs.ghn.me via TCP on 10514 using the default format.
+# Sending all logs to remote
 *.* action(type="omfwd" target="{{ remote_logs_server }}" port="{{ remote_logs_port }}" protocol="{{ remote_logs_protocol }}")
