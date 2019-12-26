@@ -11,9 +11,9 @@
         authorized_keys:
           - ssh-ed25519 AAAA testing
     debian_software:
-      - gnupg
+      - curl
     redhat_software:
-      - gnupg
+      - curl
     apt_repositories:
       - name: GIT
         repo: ppa:git-core/ppa
