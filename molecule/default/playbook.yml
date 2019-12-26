@@ -18,10 +18,11 @@
       - name: GIT
         repo: ppa:git-core/ppa
     mount_points:
-      path: /tmp/mnt-pnt
-      src: /home
-      opts: bind
-      state: mounted
-      fstype: none
+      - name: Test mount point
+        path: /tmp/mnt-pnt
+        src: /home
+        opts: bind
+        state: mounted
+        fstype: none
   roles:
     - role: vladgh.common
