@@ -8,9 +8,6 @@
     accounts:
       - name: test
         comment: Testing Account
-        groups: test
-        append: yes
-        shell: /bin/bash
         authorized_keys:
           - ssh-ed25519 AAAA testing
   roles:

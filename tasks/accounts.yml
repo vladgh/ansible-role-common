@@ -16,18 +16,12 @@
     validate: 'visudo -cf %s'
 
 # User accounts
-- name: Create group
-  group:
-    name: "{{ item.name }}"
-  when: accounts is defined
-  with_items: "{{ accounts }}"
-
 - name: Create user
   user:
     name: "{{ item.name }}"
     comment: "{{ item.comment | default(omit) }}"
     uid: "{{ item.uid | default(omit) }}"
-    group: "{{ item.group | item.name }}"
+    group: "{{ item.group | default(omit) }}"
     groups: "{{ item.groups | default(omit) }}"
     append: "{{ item.append | default(omit) }}"
     shell: "{{ item.shell | default(omit) }}"
