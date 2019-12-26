@@ -42,4 +42,4 @@
   when: remote_logs_enabled|bool and remote_logs_server is defined
 
 - import_tasks: msmtp.yml
-  when: msmtp_enabled|bool and not ( ansible_distribution == 'CentOS' and ansible_distribution_version == '8' )
+  when: msmtp_enabled|bool and not ( ansible_distribution == 'CentOS' and ansible_distribution_major_version == '8' )
