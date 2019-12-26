@@ -7,11 +7,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-      with:
-        path: vladgh.common
     - name: Set up Python
       uses: actions/setup-python@v1
     - name: Install dependencies
       run: pip install --upgrade pip ansible molecule docker testinfra flake8
     - name: Test
-      run: cd vladgh.common && molecule test
+      run: molecule test
