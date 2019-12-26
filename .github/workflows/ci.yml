@@ -10,12 +10,12 @@ jobs:
     strategy:
       matrix:
         distro:
-          - ubuntu1604
-          - ubuntu1804
-          - debian9
-          - debian10
-          - centos7
-          - centos8
+          - ubuntu:16.04
+          - ubuntu:18.04
+          - debian:9
+          - debian:10
+          - centos:7
+          - centos:8
     steps:
     - uses: actions/checkout@v2
       with:
