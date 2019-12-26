@@ -11,5 +11,9 @@
       until: task_result is success
       retries: 10
       delay: 2
+  vars:
+    remote_logs_enabled: true
+    msmtp_enabled: true
+    disable_lid_switch: true
   roles:
     - role: vladgh.common
