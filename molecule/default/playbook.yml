@@ -5,5 +5,13 @@
     remote_logs_enabled: true
     msmtp_enabled: true
     disable_lid_switch: true
+    accounts:
+      - name: test
+        comment: Testing Account
+        groups: test
+        append: yes
+        shell: /bin/bash
+        authorized_keys:
+          - ssh-ed25519 AAAA testing
   roles:
     - role: vladgh.common
