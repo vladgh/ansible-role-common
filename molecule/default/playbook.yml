@@ -20,7 +20,7 @@
     mount_points:
       - name: Test mount point
         path: test_mount
-        src: files
+        src: ../../files
         opts: bind
         state: mounted
         fstype: none
