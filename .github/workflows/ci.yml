@@ -3,14 +3,13 @@ name: CI
 on: [push, pull_request]
 
 jobs:
-  # Run tests
-  test:
+  Test:
     runs-on: ubuntu-latest
     env:
-      MOLECULE_DISTRO: ${{ matrix.distro }}
+      MOLECULE_DISTRO: ${{ matrix.os }}
     strategy:
       matrix:
-        distro:
+        os:
           - ubuntu:16.04
           - ubuntu:18.04
           - debian:9
@@ -27,8 +26,7 @@ jobs:
       run: pip install molecule docker
     - name: Test
       run: cd vladgh.common && molecule test
-  # Push role to Ansible Galaxy
-  push:
+  Deploy:
     needs: test
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master'
