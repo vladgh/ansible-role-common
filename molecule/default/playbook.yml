@@ -17,12 +17,5 @@
     apt_repositories:
       - name: GIT
         repo: ppa:git-core/ppa
-    mount_points:
-      - name: Test mount point
-        path: test_mount
-        src: ../../files
-        opts: bind
-        state: mounted
-        fstype: none
   roles:
     - role: vladgh.common
