@@ -10,6 +10,10 @@
         comment: Testing Account
         authorized_keys:
           - ssh-ed25519 AAAA testing
+    debian_software:
+      - gnupg
+    redhat_software:
+      - gnupg
     apt_repositories:
       - name: GIT
         repo: ppa:git-core/ppa
