@@ -4,19 +4,19 @@
   service:
     name: sshd
     state: restarted
-  ignore_errors: yes
+  ignore_errors: ansible_virtualization_type == "docker"
 
 - name: Restart LoginD
   service:
     name: systemd-logind
     state: restarted
-  ignore_errors: yes
+  ignore_errors: ansible_virtualization_type == "docker"
 
 - name: Restart RSysLog
   service:
     name: rsyslog
     state: restarted
-  ignore_errors: yes
+  ignore_errors: ansible_virtualization_type == "docker"
 
 # CA Certificates
 - name: Update trusted CA certificates (Debian/Ubuntu)

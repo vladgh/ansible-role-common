@@ -7,6 +7,6 @@
     disable_lid_switch: true
   pre_tasks:
     - debug:
-        msg: {{ ansible_virtualization_type == docker }}
+        msg: "{{ ansible_virtualization_type == docker }}"
   roles:
     - role: vladgh.common
