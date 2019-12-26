@@ -10,5 +10,8 @@
         comment: Testing Account
         authorized_keys:
           - ssh-ed25519 AAAA testing
+    apt_repositories:
+      - name: GIT
+        repo: ppa:git-core/ppa
   roles:
     - role: vladgh.common
