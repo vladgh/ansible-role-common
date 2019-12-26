@@ -11,6 +11,8 @@
       until: task_result is success
       retries: 10
       delay: 2
+    - debug:
+        msg: Virt is {{ ansible_virtualization_type }}
   vars:
     remote_logs_enabled: true
     msmtp_enabled: true
