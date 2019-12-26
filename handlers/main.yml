@@ -9,6 +9,7 @@
   service:
     name: systemd-logind
     state: restarted
+  ignore_errors: yes
 
 - name: Restart RSysLog
   service:
