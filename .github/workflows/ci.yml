@@ -22,9 +22,7 @@ jobs:
         path: vladgh.common
     - name: Set up Python
       uses: actions/setup-python@v1
-    - name: Install APT dependencies
-      run: sudo apt-get update && sudo apt-get -qy install python-apt
     - name: Install dependencies
-      run: pip install --upgrade pip ansible molecule docker testinfra flake8 python-apt paramiko
+      run: pip install --upgrade pip ansible molecule docker testinfra flake8 paramiko
     - name: Test
       run: cd vladgh.common && molecule test
