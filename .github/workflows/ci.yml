@@ -23,6 +23,6 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v1
     - name: Install dependencies
-      run: pip install --upgrade pip ansible molecule docker testinfra flake8
+      run: pip install --upgrade pip ansible molecule docker testinfra flake8 python-apt paramiko
     - name: Test
       run: cd vladgh.common && molecule test
