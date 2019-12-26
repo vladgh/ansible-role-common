@@ -5,5 +5,8 @@
     remote_logs_enabled: true
     msmtp_enabled: true
     disable_lid_switch: true
+  pre_tasks:
+    - debug:
+        msg: {{ ansible_virtualization_type == docker }}
   roles:
     - role: vladgh.common
