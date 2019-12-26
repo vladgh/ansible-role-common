@@ -5,5 +5,8 @@
     remote_logs_enabled: true
     msmtp_enabled: true
     disable_lid_switch: true
+  pre_tasks:
+    - debug:
+      msg: ansible_virtualization_type is {{ ansible_virtualization_type }}
   roles:
     - role: vladgh.common
