@@ -17,5 +17,9 @@
     apt_repositories:
       - name: GIT
         repo: ppa:git-core/ppa
+    cron_jobs:
+      - name: Testing
+        minute: '0'
+        job: ls -alh > /dev/null
   roles:
     - role: vladgh.common

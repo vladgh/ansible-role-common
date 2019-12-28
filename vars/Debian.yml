@@ -2,3 +2,6 @@
 # CA Certificates Paths
 ca_path: /usr/local/share/ca-certificates
 ca_bundle_cert_path: /etc/ssl/certs/ca-certificates.crt
+
+# Crontab
+crontab_package_name: cron

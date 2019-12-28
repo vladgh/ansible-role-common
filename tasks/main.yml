@@ -33,6 +33,7 @@
   retries: 10
   delay: 2
 
+- import_tasks: cron.yml
 - import_tasks: accounts.yml
 - import_tasks: ca.yml
 - import_tasks: mounts.yml
