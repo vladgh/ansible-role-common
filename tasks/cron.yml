@@ -15,5 +15,4 @@
     special_time: "{{ item.special_time | default(omit) }}"
     job: "{{ item.job }}"
     state: "{{ item.state | default(omit) }}"
-  when: cron_jobs is defined
   with_items: "{{ cron_jobs }}"

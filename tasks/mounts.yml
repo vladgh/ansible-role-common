@@ -6,5 +6,4 @@
     opts: "{{ item.opts }}"
     state: "{{ item.state }}"
     fstype: "{{ item.fstype }}"
-  when: mount_points is defined
   with_items: "{{ mount_points }}"

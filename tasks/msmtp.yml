@@ -2,8 +2,7 @@
 # MSMTP Relay Server
 - name: Install CA Certificates
   package:
-    name:
-      - ca-certificates
+    name: ca-certificates
     state: present
 
 - name: Install MSMTP and MailX (Debian/Ubuntu)
