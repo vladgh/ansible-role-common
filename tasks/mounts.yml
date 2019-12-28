@@ -1,5 +1,22 @@
 ---
-- name: Create the shared directories
+# Make sure the NFS package is installed if any mount point is of 'nfs' type
+- name: Ensure NFS package is installed
+  package:
+    name: "{{ nfs_client_package_name }}"
+    when: nfs in mount_points.[].fstype
+  when: item.fstype is defined and item.fstype == 'nfs'
+  with_items: "{{ mount_points }}"
+
+# Make sure the RPCBind service is enabled and running if any mount point is of 'nfs' type
+- name: Ensure RPCBind service is enabled and running
+  service:
+    name: rpcbind
+    state: started
+    enabled: yes
+  when: item.fstype is defined and item.fstype == 'nfs'
+  with_items: "{{ mount_points }}"
+
+- name: Create the local directories
   file:
     path: "{{ item.path }}"
     state: directory
@@ -7,7 +24,7 @@
     group: "{{ item.group | default(omit) }}"
   with_items: "{{ mount_points }}"
 
-- name: Create mountpoints
+- name: Create mount points
   mount:
     name: "{{ item.state | default(omit) }}"
     path: "{{ item.path }}"
