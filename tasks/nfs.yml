@@ -23,7 +23,7 @@
     path: "{{ item.path }}"
     src: "{{ item.src }}"
     opts: "{{ item.opts | default(omit) }}"
-    fstype: "{{ item.fstype | default('nfs')}}"
+    fstype: "{{ item.fstype | default('nfs') }}"
     dump: "{{ item.dump | default(omit) }}"
     passno: "{{ item.passno | default(omit) }}"
     state: "{{ item.state | default('mounted') }}"
