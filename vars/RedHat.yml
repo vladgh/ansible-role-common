@@ -5,3 +5,6 @@ ca_bundle_cert_path: /etc/ssl/certs/ca-bundle.crt
 
 # Crontab
 crontab_package_name: cronie
+
+# NFS
+nfs_client_package_name: nfs-utils

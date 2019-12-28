@@ -1,0 +1,30 @@
+---
+- name: Ensure NFS package is installed
+  package:
+    name: "{{ nfs_client_package_name }}"
+
+- name: Ensure RPCBind service is enabled and running
+  service:
+    name: rpcbind
+    state: started
+    enabled: yes
+
+- name: Create the shared directories
+  file:
+    path: "{{ item.path }}"
+    state: directory
+    owner: "{{ item.owner | default(omit) }}"
+    group: "{{ item.group | default(omit) }}"
+  with_items: "{{ nfs_mount_points }}"
+
+- name: Create mountpoints
+  mount:
+    name: "{{ item.state | default(omit) }}"
+    path: "{{ item.path }}"
+    src: "{{ item.src }}"
+    opts: "{{ item.opts | default(omit) }}"
+    fstype: "{{ item.fstype | default('nfs')}}"
+    dump: "{{ item.dump | default(omit) }}"
+    passno: "{{ item.passno | default(omit) }}"
+    state: "{{ item.state | default('mounted') }}"
+  with_items: "{{ nfs_mount_points }}"

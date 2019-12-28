@@ -37,7 +37,8 @@
 - import_tasks: accounts.yml
 - import_tasks: ca.yml
 - import_tasks: mounts.yml
-- import_tasks: misc.yml
+- import_tasks: nfs.yml
+  when: nfs_mount_points is defined
 
 - import_tasks: logs.yml
   when: remote_logs_enabled|bool and remote_logs_server is defined
