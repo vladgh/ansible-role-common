@@ -9,6 +9,7 @@
 
 # Common tasks
 - import_tasks: apt.yml
+  when: ansible_os_family == "Debian"
 
 # Software
 - name: Install essential software (Debian/Ubuntu)
@@ -34,13 +35,20 @@
   delay: 2
 
 - import_tasks: cron.yml
+  when: cron_jobs is defined
+
 - import_tasks: accounts.yml
+  when: accounts is defined
+
 - import_tasks: ca.yml
+
 - import_tasks: mounts.yml
-- import_tasks: misc.yml
+  when: mount_points is defined
 
 - import_tasks: logs.yml
   when: remote_logs_enabled|bool and remote_logs_server is defined
 
 - import_tasks: msmtp.yml
   when: msmtp_enabled|bool and not ( ansible_distribution == 'CentOS' and ansible_distribution_major_version == '8' )
+
+- import_tasks: misc.yml
