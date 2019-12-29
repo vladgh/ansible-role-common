@@ -16,7 +16,3 @@ provisioner:
     name: ansible-lint
   playbooks:
     converge: ${MOLECULE_PLAYBOOK:-playbook.yml}
-verifier:
-  name: testinfra
-  lint:
-    name: flake8
