@@ -2,6 +2,7 @@
 - name: Converge
   hosts: all
   vars:
+    install_ca_certificates: true
     remote_logs_enabled: true
     msmtp_enabled: true
     disable_lid_switch: true

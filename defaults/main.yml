@@ -1,12 +1,23 @@
 ---
+# CA Certificates
+## Set to true to install all certificates from files/ca
+install_ca_certificates: false
+
 # Remote logs
-remote_logs_enabled: false  # Set to true to enable
+## Set to true to enable
+remote_logs_enabled: false
 remote_logs_server: logs.example.com
 remote_logs_port: 10514
 remote_logs_protocol: tcp
+remote_logs_permitted_peer: "{{ remote_logs_server }}"
+remote_logs_ca_file: "{{ ca_bundle_cert_path }}"
+remote_logs_template:
+  name: ''
+  string: ''
 
 # MSMTP relay
-msmtp_enabled: false  # Set to true to enable
+## Set to true to enable
+msmtp_enabled: false
 ## Logging (Select A) "syslog" or B) "file" logging or C) "no" log
 msmtp_log: syslog
 msmtp_logfile: /var/log/msmtp.log
