@@ -4,7 +4,7 @@
   apt_repository:
     repo: "deb http://archive.ubuntu.com/ubuntu {{ ansible_distribution_release|lower }} universe"
     state: present
-  when: ansible_distribution == 'Ubuntu' and ansible_distribution_version >= '16.04'
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_major_version|int >= 16
 
 - name: Ensure GnuPG package is installed
   package:

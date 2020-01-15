@@ -17,7 +17,7 @@
     name: "{{ debian_software }}"
     state: present
     update_cache: yes
-  when: ansible_os_family == "Debian" and debian_software is defined
+  when: ansible_os_family == "Debian" and debian_software is defined and debian_software
   register: task_result
   until: task_result is success
   retries: 10
@@ -28,28 +28,28 @@
     name: "{{ redhat_software }}"
     state: present
     update_cache: yes
-  when: ansible_os_family == "RedHat" and redhat_software is defined
+  when: ansible_os_family == "RedHat" and redhat_software is defined and redhat_software
   register: task_result
   until: task_result is success
   retries: 10
   delay: 2
 
 - import_tasks: accounts.yml
-  when: accounts is defined
+  when: accounts is defined and accounts
 
 - import_tasks: cron.yml
-  when: cron_jobs is defined
+  when: cron_jobs is defined and cron_jobs
 
 - import_tasks: mounts.yml
-  when: mount_points is defined
+  when: mount_points is defined and mount_points
 
 - import_tasks: ca.yml
-  when: install_ca_certificates|bool
+  when: install_ca_certificates is defined and install_ca_certificates|bool
 
 - import_tasks: logs.yml
-  when: remote_logs_enabled|bool
+  when: remote_logs_enabled is defined and remote_logs_enabled|bool
 
 - import_tasks: msmtp.yml
-  when: msmtp_enabled|bool and not ( ansible_distribution == 'CentOS' and ansible_distribution_major_version == '8' )
+  when: msmtp_enabled is defined and msmtp_enabled|bool and not ( ansible_distribution == 'CentOS' and ansible_distribution_major_version|int >= 8 )
 
 - import_tasks: misc.yml
