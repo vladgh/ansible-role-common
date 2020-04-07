@@ -1,4 +1,7 @@
 ---
+# APT
+ubuntu_universe_repo: false
+
 # CA Certificates
 ## Set to true to install all certificates from files/ca
 install_ca_certificates: false

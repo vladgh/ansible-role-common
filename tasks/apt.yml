@@ -4,11 +4,12 @@
   apt_repository:
     repo: "deb http://archive.ubuntu.com/ubuntu {{ ansible_distribution_release|lower }} universe"
     state: present
-  when: ansible_distribution == 'Ubuntu' and ansible_distribution_major_version|int >= 16
+  when: ubuntu_universe_repo is defined and ubuntu_universe_repo
 
 - name: Ensure GnuPG package is installed
   package:
     name: gnupg2
+  when: ansible_distribution == 'Ubuntu' and apt_repositories is defined
 
 - name: Add extra APT repositories
   apt_repository:
