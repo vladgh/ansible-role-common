@@ -23,7 +23,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v1
     - name: Install dependencies
-      run: pip install molecule docker
+      run: pip install molecule docker ansible-lint yamllint
     - name: Test
       run: cd vladgh.common && molecule test
   Deploy:
