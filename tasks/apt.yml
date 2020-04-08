@@ -7,12 +7,22 @@
   when: ubuntu_universe_repo is defined and ubuntu_universe_repo
 
 - name: Ensure GnuPG package is installed
-  package:
+  apt:
     name: gnupg2
   when: ansible_distribution == 'Ubuntu' and apt_repositories is defined
 
 - name: Add extra APT repositories
   apt_repository:
     repo: "{{ item.repo }}"
+    update_cache: no
   with_items: "{{ apt_repositories }}"
+  when: ansible_distribution == 'Ubuntu' and apt_repositories is defined
+
+- name: Update Apt cache
+  apt:
+    update_cache: yes
+  register: _update_apt_cache
+  until: _update_apt_cache is success
+  retries: 3
+  delay: 2
   when: ansible_distribution == 'Ubuntu' and apt_repositories is defined

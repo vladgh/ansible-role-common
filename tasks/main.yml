@@ -20,7 +20,7 @@
   when: ansible_os_family == "Debian" and debian_software is defined and debian_software
   register: task_result
   until: task_result is success
-  retries: 10
+  retries: 3
   delay: 2
 
 - name: Install essential software (RedHat/CentOS)
@@ -31,7 +31,7 @@
   when: ansible_os_family == "RedHat" and redhat_software is defined and redhat_software
   register: task_result
   until: task_result is success
-  retries: 10
+  retries: 3
   delay: 2
 
 - import_tasks: accounts.yml
