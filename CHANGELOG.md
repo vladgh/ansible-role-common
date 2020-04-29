@@ -1,16 +1,8 @@
 # Changelog
 
-## [v0.0.0](https://github.com/vladgh/ansible-role-common/tree/v0.0.0) (2020-04-23)
+## [v0.0.0](https://github.com/vladgh/ansible-role-common/tree/v0.0.0) (2020-04-28)
 
-[Full Changelog](https://github.com/vladgh/ansible-role-common/compare/v0.0.1...v0.0.0)
-
-## [v0.0.1](https://github.com/vladgh/ansible-role-common/tree/v0.0.1) (2020-04-23)
-
-[Full Changelog](https://github.com/vladgh/ansible-role-common/compare/v0.0.2...v0.0.1)
-
-## [v0.0.2](https://github.com/vladgh/ansible-role-common/tree/v0.0.2) (2020-04-23)
-
-[Full Changelog](https://github.com/vladgh/ansible-role-common/compare/59d77652e7e445056926389a1d7c38819ca9e948...v0.0.2)
+[Full Changelog](https://github.com/vladgh/ansible-role-common/compare/59d77652e7e445056926389a1d7c38819ca9e948...v0.0.0)
 
 **Implemented enhancements:**
 
