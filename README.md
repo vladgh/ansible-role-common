@@ -1,6 +1,6 @@
 # Ansible Role: Common
 
-[![Build Status](https://travis-ci.com/vladgh/ansible-role-common.svg?branch=master)](https://travis-ci.com/vghn/ansible-role-common)
+![Build Status](https://github.com/vladgh/ansible-role-common/workflows/CI/badge.svg)
 
 Vlad's Common Ansible Role.
 
