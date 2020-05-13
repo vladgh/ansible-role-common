@@ -6,11 +6,10 @@ jobs:
   Test:
     runs-on: ubuntu-latest
     env:
-      MOLECULE_DISTRO: ${{ matrix.os }}
+      ANSIBLE_FORCE_COLOR: '1'
     strategy:
       matrix:
         os:
-          - ubuntu:16.04
           - ubuntu:18.04
           - ubuntu:20.04
           - debian:9
@@ -22,18 +21,20 @@ jobs:
       with:
         path: vladgh.common
     - name: Set up Python
-      uses: actions/setup-python@v1
+      uses: actions/setup-python@v2
     - name: Install dependencies
       run: pip install molecule docker ansible-lint yamllint
     - name: Test
       run: cd vladgh.common && molecule test
+      env:
+        MOLECULE_DISTRO: "${{ matrix.os }}"
   Deploy:
     needs: test
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master'
     steps:
     - name: Set up Python
-      uses: actions/setup-python@v1
+      uses: actions/setup-python@v2
     - name: Install dependencies
       run: pip install ansible
     - name: Deploy
