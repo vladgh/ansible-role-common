@@ -3,7 +3,8 @@ name: CI
 on: [push, pull_request]
 
 jobs:
-  Test:
+  test:
+    name: Test
     runs-on: ubuntu-latest
     env:
       ANSIBLE_FORCE_COLOR: '1'
@@ -28,7 +29,8 @@ jobs:
       run: cd vladgh.common && molecule test
       env:
         MOLECULE_DISTRO: "${{ matrix.os }}"
-  Deploy:
+  deploy:
+    name: Deploy
     needs: test
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master'
