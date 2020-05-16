@@ -1,0 +1,14 @@
+---
+- name: Provision DNS records
+  cloudflare_dns:
+    zone: "{{ item.zone }}"
+    type: "{{ item.type }}"
+    record: "{{ item.record }}"
+    value: "{{ item.value }}"
+    proxied: "{{ item.proxied | default(omit) }}"
+    account_email: "{{ cloudflare_email }}"
+    account_api_token: "{{ cloudflare_api_token }}"
+  with_items: "{{ cloudflare_dns_records }}"
+  when: ( cloudflare_email is defined and cloudflare_email ) and
+        ( cloudflare_api_token is defined and cloudflare_api_token ) and
+        ( cloudflare_dns_records is defined and cloudflare_dns_records|length > 0 )
