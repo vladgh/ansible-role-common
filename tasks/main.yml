@@ -7,11 +7,9 @@
     - "{{ ansible_os_family }}.yml"
   tags: vars
 
-# Common tasks
 - import_tasks: apt.yml
   when: ansible_os_family == "Debian"
 
-# Software
 - name: Install additional packages (Debian/Ubuntu)
   apt:
     name: "{{ debian_software }}"
