@@ -12,7 +12,7 @@
   when: ansible_os_family == "Debian"
 
 # Software
-- name: Install essential software (Debian/Ubuntu)
+- name: Install additional packages (Debian/Ubuntu)
   apt:
     name: "{{ debian_software }}"
     state: present
@@ -23,7 +23,7 @@
   retries: 3
   delay: 2
 
-- name: Install essential software (RedHat/CentOS)
+- name: Install additional packages (RedHat/CentOS)
   yum:
     name: "{{ redhat_software }}"
     state: present
