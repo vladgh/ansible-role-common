@@ -25,6 +25,9 @@
     groups: "{{ item.groups | default(omit) }}"
     append: "{{ item.append | default(omit) }}"
     shell: "{{ item.shell | default(omit) }}"
+    home: "{{ item.home | default(omit) }}"
+    create_home: "{{ item.create_home | default(omit) }}"
+    system: "{{ item.system | default(omit) }}"
   with_items: "{{ accounts }}"
 
 # SSH authorized keys
