@@ -11,9 +11,7 @@
         comment: Testing Account
         authorized_keys:
           - ssh-ed25519 AAAA testing
-    debian_software:
-      - curl
-    redhat_software:
+    additional_packages:
       - curl
     apt_repositories:
       - name: GIT

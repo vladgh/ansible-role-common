@@ -12,11 +12,6 @@ Vlad's Common Ansible Role.
 
 Available variables are listed below, along with default values (see defaults/main.yml):
 
-### Essential packages
-
-- `debian_software`: A list of packages to install using APT
-- `redhat_software`: A list of packages to install using YUM
-
 ### User accounts
 
 Check <https://docs.ansible.com/ansible/latest/modules/user_module.html> for a complete list of parameters
@@ -89,6 +84,10 @@ mount_points:
 ### Miscellaneous
 
 - `disable_lid_switch`: Set to true to disable lid switch on laptops (defaults to `false`)
+
+### Additional packages
+
+- `additional_packages`: A list of packages to install using APT/YUM
 
 ## Dependencies
 

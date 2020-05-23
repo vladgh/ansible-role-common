@@ -10,27 +10,8 @@
 - import_tasks: apt.yml
   when: ansible_os_family == "Debian"
 
-- name: Install additional packages (Debian/Ubuntu)
-  apt:
-    name: "{{ debian_software }}"
-    state: present
-    update_cache: yes
-  when: ansible_os_family == "Debian" and debian_software is defined and debian_software
-  register: task_result
-  until: task_result is success
-  retries: 3
-  delay: 2
-
-- name: Install additional packages (RedHat/CentOS)
-  yum:
-    name: "{{ redhat_software }}"
-    state: present
-    update_cache: yes
-  when: ansible_os_family == "RedHat" and redhat_software is defined and redhat_software
-  register: task_result
-  until: task_result is success
-  retries: 3
-  delay: 2
+- import_tasks: packages.yml
+  when: additional_packages is defined and additional_packages
 
 - import_tasks: accounts.yml
   when: accounts is defined and accounts
