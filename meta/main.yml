@@ -2,15 +2,13 @@
 galaxy_info:
   role_name: common
   author: Vlad Ghinea
-  description: Common Role
-  company: VladGh.com
+  description: Vlad's Common Role
   license: Apache v2
   min_ansible_version: 2.4
   galaxy_tags: []
   platforms:
     - name: Ubuntu
       versions:
-        - xenial
         - bionic
         - focal
     - name: Debian

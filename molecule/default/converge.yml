@@ -4,7 +4,6 @@
   vars:
     install_ca_certificates: true
     remote_logs_enabled: true
-    msmtp_enabled: true
     disable_lid_switch: true
     accounts:
       - name: test
@@ -19,6 +18,8 @@
     cron_jobs:
       - name: Testing
         minute: '0'
-        job: ls -alh > /dev/null
-  roles:
-    - role: vladgh.common
+        job: ls -lah > /dev/null
+  tasks:
+    - name: Include role
+      include_role:
+        name: vladgh.common
