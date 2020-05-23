@@ -6,16 +6,11 @@ Vlad's Common Ansible Role.
 
 ## Requirements
 
-*N/A*
+*_N/A_*
 
 ## Role Variables
 
 Available variables are listed below, along with default values (see defaults/main.yml):
-
-### Essential packages
-
-- `debian_software`: A list of packages to install using APT
-- `redhat_software`: A list of packages to install using YUM
 
 ### User accounts
 
@@ -43,35 +38,38 @@ apt_repositories:
     repo: ppa:git-core/ppa
 ```
 
+### CloudFlare DNS
+
+Check <https://docs.ansible.com/ansible/latest/modules/cloudflare_dns_module.html> for a complete list of parameters
+
+```yaml
+cloudflare_email: "{{ vault_cloudflare_email }}"
+cloudflare_api_token: "{{ vault_cloudflare_api_token }}"
+cloudflare_dns_records:
+  - zone: example.com
+    type: A
+    record: test
+    value: 192.168.1.2
+```
+
+### CRON Jobs
+
+Check <https://docs.ansible.com/ansible/latest/modules/cron_module.html> for a complete list of parameters
+
+```yaml
+cron_jobs:
+  - name: Docker CleanUp
+    minute: '2'
+    hour: '2'
+    job: docker system prune --force 2>&1 | /usr/bin/logger -t DockerCleanUp
+```
+
 ### Remote logging
 
 - `remote_logs_enabled`: Set to true to enable remote logging (defaults to `false`)
 - `remote_logs_server`: Remote logs server (defaults to `logs.example.com`)
 - `remote_logs_port`: Remote logs port (defaults to `10514`)
 - `remote_logs_protocol`: Remote logs protocol (defaults to `tcp`)
-
-### MSMTP relay
-
-- `msmtp_enabled`: Set to true to enable MSMTP relay (defaults to `false`)
-- `msmtp_log`: Log type; one of `syslog`, `file` or `no` (defaults to `syslog`)
-- `msmtp_logfile`: If above type is file, the path to it (defaults to `/var/log/msmtp.log`)
-- `msmtp_accounts`: A hash of MSMTP accounts, for example
-
-    ```yaml
-    - account: mysmtp
-      host: smtp.example
-      port: 587
-      auth: on
-      from: me
-      user: myuser
-      password: 123456
-    ```
-
-- `msmtp_default_account`: Default MSMTP account from the list above
-- `msmtp_alias_default`: The default user alias (defaults to `root`)
-- `msmtp_alias_root`: The root alias (defaults to `msmtp_alias_default`)
-- `msmtp_alias_cron`: The cron alias (defaults to `msmtp_alias_default`)
-- `msmtp_ca_certificates_bundle`: The path for the certificates bundle (default to system's CA Certificates Paths; see `vars/OS_FAMILY.yml`)
 
 ### Extra mount points
 
@@ -90,9 +88,13 @@ mount_points:
 
 - `disable_lid_switch`: Set to true to disable lid switch on laptops (defaults to `false`)
 
+### Additional packages
+
+- `additional_packages`: A list of packages to install using APT/YUM
+
 ## Dependencies
 
-*N/A*
+*_N/A_*
 
 ## Example Playbook
 
@@ -103,10 +105,11 @@ mount_points:
       - vladgh.common
 ```
 
+## Contribute
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) file.
+
 ## License
 
-Apache License 2.0
-
-## Author Information
-
-Vlad Ghinea - <https://ghn.me>
+Licensed under the Apache License, Version 2.0.
+See [LICENSE](LICENSE) file.

@@ -4,6 +4,7 @@
   stat:
     path: /etc/systemd/logind.conf
   register: systemd_logind_conf
+
 - name: Disable lid switch
   lineinfile:
     dest: /etc/systemd/logind.conf

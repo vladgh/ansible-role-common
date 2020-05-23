@@ -40,4 +40,4 @@ jobs:
     - name: Install dependencies
       run: pip install ansible
     - name: Deploy
-      run: ansible-galaxy role import --role-name vladgh.com --api-key ${{ secrets.ANSIBLE_GALAXY_API_KEY }} vladgh ansible-role-common
+      run: ansible-galaxy role import --api-key ${{ secrets.ANSIBLE_GALAXY_API_KEY }} vladgh ansible-role-common

@@ -1,14 +1,14 @@
 ---
 # APT
-ubuntu_universe_repo: false
+ubuntu_universe_repo: no
 
 # CA Certificates
 ## Set to true to install all certificates from files/ca
-install_ca_certificates: false
+install_ca_certificates: no
 
 # Remote logs
 ## Set to true to enable
-remote_logs_enabled: false
+remote_logs_enabled: no
 remote_logs_server: logs.example.com
 remote_logs_port: 10514
 remote_logs_protocol: tcp
@@ -18,19 +18,6 @@ remote_logs_template:
   name: ''
   string: ''
 
-# MSMTP relay
-## Set to true to enable
-msmtp_enabled: false
-## Logging (Select A) "syslog" or B) "file" logging or C) "no" log
-msmtp_log: syslog
-msmtp_logfile: /var/log/msmtp.log
-## Aliases mail account ( only msmtp_alias_default is required the rest is optional )
-msmtp_alias_default: root
-msmtp_alias_root: "{{ msmtp_alias_default }}"
-msmtp_alias_cron: "{{ msmtp_alias_default }}"
-## Other
-msmtp_ca_certificates_bundle: "{{ ca_bundle_cert_path }}"
-
 # Miscellaneous
 ## Set to true to disable lid switch on laptops.
-disable_lid_switch: false
+disable_lid_switch: no
