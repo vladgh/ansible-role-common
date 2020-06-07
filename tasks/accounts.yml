@@ -1,22 +1,24 @@
 ---
-# Admins
-- name: Create Admins group
+- name: Create groups
   group:
-    name: admins
-    system: yes
-    state: present
+    name: "{{ item.name }}"
+    gid: "{{ item.gid | default(omit) }}"
+    system: "{{ item.system | default(omit) }}"
+    state: "{{ item.state | default(omit) }}"
+  with_items: "{{ local_groups }}"
 
-- name: Add Admins to Sudoers
+- name: Add Groups to Sudoers
   lineinfile:
-    path: /etc/sudoers.d/10_admins
-    line: '%admins ALL=(ALL) NOPASSWD: ALL'
-    state: present
+    path: "/etc/sudoers.d/10_{{ item.name }}"
+    line: "%{{ item.name }} ALL=(ALL) NOPASSWD: ALL"
+    state: "{{ item.state | default(omit) }}"
     mode: 0440
     create: yes
     validate: 'visudo -cf %s'
+  when: item.sudo is defined and item.sudo
+  with_items: "{{ local_groups }}"
 
-# User accounts
-- name: Create user
+- name: Create users
   user:
     name: "{{ item.name }}"
     comment: "{{ item.comment | default(omit) }}"
@@ -28,14 +30,14 @@
     home: "{{ item.home | default(omit) }}"
     create_home: "{{ item.create_home | default(omit) }}"
     system: "{{ item.system | default(omit) }}"
-  with_items: "{{ accounts }}"
+    state: "{{ item.state | default(omit) }}"
+  with_items: "{{ local_users }}"
 
-# SSH authorized keys
 - name: Add authorized keys
   authorized_key:
     user: "{{ item.0.name }}"
     key: "{{ item.1 }}"
   with_subelements:
-    - "{{ accounts }}"
+    - "{{ local_users }}"
     - authorized_keys
     - skip_missing: yes

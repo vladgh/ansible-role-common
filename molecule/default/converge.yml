@@ -5,9 +5,12 @@
     install_ca_certificates: true
     remote_logs_enabled: true
     disable_lid_switch: true
-    accounts:
+    local_groups:
       - name: test
-        comment: Testing Account
+        sudo: yes
+    local_users:
+      - name: test
+        comment: Testing User
         authorized_keys:
           - ssh-ed25519 AAAA testing
     additional_packages:
