@@ -12,12 +12,12 @@ Vlad's Common Ansible Role.
 
 Available variables are listed below, along with default values (see defaults/main.yml):
 
-### User accounts
+### Users
 
 Check <https://docs.ansible.com/ansible/latest/modules/user_module.html> for a complete list of parameters
 
 ```yaml
-accounts:
+local_users:
   - name: username
     comment: My User Name
     uid: 8888
@@ -26,6 +26,16 @@ accounts:
     shell: /bin/bash
     authorized_keys:
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE0yyqRUbBGOW9PcYyuaUMaRi/EFwL59E3wwMn5dJAKQ MyKey
+```
+
+### Groups
+
+Check <https://docs.ansible.com/ansible/latest/modules/group_module.html> for a complete list of parameters
+
+```yaml
+local_groups:
+  - name: mygroup
+    gid: 1234
 ```
 
 ### Extra APT repositories on Debian systems
