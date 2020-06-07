@@ -14,7 +14,9 @@
   when: additional_packages is defined and additional_packages
 
 - import_tasks: accounts.yml
-  when: accounts is defined and accounts
+  when: >
+    ( local_groups is defined and local_groups ) or
+    ( local_users is defined and local_users )
 
 - import_tasks: cron.yml
   when: cron_jobs is defined and cron_jobs
