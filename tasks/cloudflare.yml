@@ -1,6 +1,7 @@
 ---
 - name: Provision DNS records
   cloudflare_dns:
+    state: "{{ item.state | default('present') }}"
     zone: "{{ item.zone }}"
     type: "{{ item.type }}"
     record: "{{ item.record }}"
