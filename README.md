@@ -112,12 +112,14 @@ mount_points:
 - hosts: all
   become: yes
   roles:
-      - vladgh.common
+    - vladgh.common
 ```
 
 ## Contribute
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) file.
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](code_of_conduct.md)
+
+Contributions are always welcome! Please read the [contribution guidelines](.github/CONTRIBUTING.md) and the [code of conduct](.github/CODE_OF_CONDUCT.md).
 
 ## License
 
