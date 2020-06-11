@@ -29,4 +29,9 @@
 - import_tasks: logs.yml
   when: remote_logs_enabled is defined and remote_logs_enabled|bool
 
+- import_tasks: dns.yml
+  when: ( cloudflare_email is defined and cloudflare_email ) and
+        ( cloudflare_api_token is defined and cloudflare_api_token ) and
+        ( cloudflare_dns_records is defined and cloudflare_dns_records|length > 0 )
+
 - import_tasks: misc.yml
