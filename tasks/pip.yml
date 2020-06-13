@@ -10,13 +10,3 @@
     name: "{{ pip_install_packages }}"
     state: present
     executable: "{{ pip_executable | default('pip3') }}"
-
-- name: Ensure pip_user_install_packages are installed
-  become: yes
-  become_user: "{{ item.key }}"
-  pip:
-    name: "{{ item.value }}"
-    extra_args: --user --upgrade
-    state: present
-    executable: "{{ pip_executable | default('pip3') }}"
-  with_dict: "{{ pip_user_install_packages }}"

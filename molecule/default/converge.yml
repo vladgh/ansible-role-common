@@ -19,9 +19,7 @@
     apt_repositories:
       - name: GIT
         repo: ppa:git-core/ppa
-    pip_install_packages: [ipaddress]
-    pip_user_install_packages:
-      test: [colorama]
+    pip_install_packages: [pip-install-test]
     cron_jobs:
       - name: Testing
         minute: '0'
