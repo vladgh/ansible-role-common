@@ -28,4 +28,4 @@ $template {{ remote_logs_template['name'] }},"{{ remote_logs_template['string'] 
 {% endif %}
 
 # Sending all logs to remote
-*.* {% if remote_logs_protocol is defined %}{% if remote_logs_protocol == 'tcp' %}@@{% elif remote_logs_protocol == 'udp' %}@{% endif %}{% endif %}{{ remote_logs_server }}:{{ remote_logs_port | default('10514') }}{% if remote_logs_template is defined and remote_logs_template['name'] != '' %};{{ remote_logs_template['name'] }}{% endif %}
+*.* {% if remote_logs_protocol == 'tcp' %}@@{% elif remote_logs_protocol == 'udp' %}@{% else %}@@{% endif %}{{ remote_logs_server }}:{{ remote_logs_port }}{% if remote_logs_template is defined and remote_logs_template['name'] != '' %};{{ remote_logs_template['name'] }}{% endif %}
