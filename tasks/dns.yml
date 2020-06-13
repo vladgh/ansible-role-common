@@ -1,7 +1,6 @@
 ---
 - name: Provision DNS records
   cloudflare_dns:
-    delegate_to: localhost
     state: "{{ item.state | default('present') }}"
     zone: "{{ item.zone }}"
     type: "{{ item.type }}"
@@ -11,3 +10,4 @@
     account_email: "{{ cloudflare_email }}"
     account_api_token: "{{ cloudflare_api_token }}"
   with_items: "{{ cloudflare_dns_records }}"
+  delegate_to: localhost
