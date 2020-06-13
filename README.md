@@ -21,7 +21,7 @@ local_users:
   - name: username
     comment: My User Name
     uid: 8888
-    groups: admins
+    groups: mygroup
     append: yes
     shell: /bin/bash
     authorized_keys:
@@ -76,10 +76,10 @@ cron_jobs:
 
 ### Remote logging
 
-- `remote_logs_enabled`: Set to true to enable remote logging (defaults to `false`)
+- `remote_logs_enabled`: Set to yes to enable remote logging (defaults to `no`)
 - `remote_logs_server`: Remote logs server (defaults to `logs.example.com`)
 - `remote_logs_port`: Remote logs port (defaults to `10514`)
-- `remote_logs_protocol`: Remote logs protocol (defaults to `tcp`)
+- `remote_logs_protocol`: Remote logs protocol (`tcp` or `udp`)
 
 ### Extra mount points
 
@@ -96,11 +96,23 @@ mount_points:
 
 ### Miscellaneous
 
-- `disable_lid_switch`: Set to true to disable lid switch on laptops (defaults to `false`)
+- `disable_lid_switch`: Set to yes to disable lid switch on laptops (defaults to `no`)
 
 ### Additional packages
 
 - `additional_packages`: A list of packages to install using APT/YUM
+
+### Python packages
+
+Check <https://docs.ansible.com/ansible/latest/modules/pip_module.html> for more info
+
+```yaml
+# System wide install
+pip_install_packages: [ipaddress]
+# User install
+pip_user_install_packages:
+  test: [colorama]
+```
 
 ## Dependencies
 

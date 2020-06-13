@@ -1,27 +1,41 @@
 ---
 - name: Converge
   hosts: all
+  become: yes
   vars:
-    install_ca_certificates: true
-    remote_logs_enabled: true
-    disable_lid_switch: true
     local_groups:
-      - name: test
+      - name: admins
+        system: yes
         sudo: yes
     local_users:
       - name: test
         comment: Testing User
+        groups: admins
+        append: yes
         authorized_keys:
           - ssh-ed25519 AAAA testing
     additional_packages:
-      - curl
+      - rolldice
     apt_repositories:
       - name: GIT
         repo: ppa:git-core/ppa
+    pip_install_packages: [ipaddress]
+    pip_user_install_packages:
+      test: [colorama]
     cron_jobs:
       - name: Testing
         minute: '0'
         job: ls -lah > /dev/null
+    mount_points:
+      - name: Test
+        path: /tmp/boot
+        src: /boot
+        opts: bind
+        fstype: none
+    install_ca_certificates: true
+    remote_logs_enabled: true
+    remote_logs_server: example.com
+    disable_lid_switch: true
   tasks:
     - name: Include role
       include_role:

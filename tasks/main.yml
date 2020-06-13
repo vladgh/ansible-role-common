@@ -1,21 +1,19 @@
 ---
-- name: Include OS specific variables
-  include_vars: "{{ item }}"
-  with_first_found:
-    - "{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
-    - "{{ ansible_distribution }}.yml"
-    - "{{ ansible_os_family }}.yml"
+- import_tasks: accounts.yml
 
 - import_tasks: apt.yml
-  when: ansible_os_family == "Debian"
+  when: ansible_distribution == 'Ubuntu' and apt_repositories is defined
 
 - import_tasks: packages.yml
   when: additional_packages is defined and additional_packages
 
-- import_tasks: accounts.yml
+- import_tasks: pip.yml
   when: >
-    ( local_groups is defined and local_groups ) or
-    ( local_users is defined and local_users )
+    ( pip_install_packages is defined and pip_install_packages ) or
+    ( pip_user_install_packages is defined and pip_user_install_packages )
+
+- import_tasks: ca.yml
+  when: install_ca_certificates is defined and install_ca_certificates|bool
 
 - import_tasks: cron.yml
   when: cron_jobs is defined and cron_jobs
@@ -23,15 +21,13 @@
 - import_tasks: mounts.yml
   when: mount_points is defined and mount_points
 
-- import_tasks: ca.yml
-  when: install_ca_certificates is defined and install_ca_certificates|bool
-
 - import_tasks: logs.yml
   when: remote_logs_enabled is defined and remote_logs_enabled|bool
 
 - import_tasks: dns.yml
-  when: ( cloudflare_email is defined and cloudflare_email ) and
-        ( cloudflare_api_token is defined and cloudflare_api_token ) and
-        ( cloudflare_dns_records is defined and cloudflare_dns_records|length > 0 )
+  when: >
+    ( cloudflare_email is defined and cloudflare_email ) and
+    ( cloudflare_api_token is defined and cloudflare_api_token ) and
+    ( cloudflare_dns_records is defined and cloudflare_dns_records )
 
 - import_tasks: misc.yml

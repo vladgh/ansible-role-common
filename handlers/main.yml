@@ -19,14 +19,5 @@
   ignore_errors: "{{ ansible_virtualization_type in [\"docker\", \"VirtualPC\"] }}"
 
 # CA Certificates
-- name: Update trusted CA certificates (Debian/Ubuntu)
+- name: Update trusted CA certificates
   command: /usr/sbin/update-ca-certificates --fresh
-  when: ansible_os_family == "Debian"
-
-- name: Update trusted CA certificates (RedHat/CentOS < 7)
-  command: /usr/bin/update-ca-trust enable
-  when: ansible_os_family == "RedHat" and ansible_distribution_major_version|int < 7
-
-- name: Update trusted CA certificates (RedHat/CentOS >= 7)
-  command: /usr/bin/update-ca-trust
-  when: ansible_os_family == "RedHat" and ansible_distribution_major_version|int >= 7

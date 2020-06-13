@@ -15,13 +15,17 @@ $ActionFileDefaultTemplate RSYSLOG_TraditionalFileFormat
 $DefaultNetstreamDriver gtls
 $ActionSendStreamDriverMode 1
 $ActionSendStreamDriverAuthMode x509/name
+{% if remote_logs_permitted_peer is defined and remote_logs_permitted_peer %}
 $ActionSendStreamDriverPermittedPeer {{ remote_logs_permitted_peer }}
+{% endif %}
+{% if remote_logs_ca_file is defined and remote_logs_ca_file %}
 $DefaultNetStreamDriverCAFile {{ remote_logs_ca_file }}
+{% endif %}
 
-{% if remote_logs_template['name'] != '' and remote_logs_template['string'] != '' %}
+{% if remote_logs_template is defined and remote_logs_template['name'] != '' and remote_logs_template['string'] != '' %}
 # Use a template
 $template {{ remote_logs_template['name'] }},"{{ remote_logs_template['string'] }}"
 {% endif %}
 
 # Sending all logs to remote
-*.* {% if remote_logs_protocol == 'tcp' %}@@{% elif remote_logs_protocol == 'udp' %}@{% endif %}{{ remote_logs_server }}:{{ remote_logs_port }}{% if remote_logs_template['name'] != '' %};{{ remote_logs_template['name'] }}{% endif %}
+*.* {% if remote_logs_protocol is defined %}{% if remote_logs_protocol == 'tcp' %}@@{% elif remote_logs_protocol == 'udp' %}@{% endif %}{% endif %}{{ remote_logs_server }}:{{ remote_logs_port | default('10514') }}{% if remote_logs_template is defined and remote_logs_template['name'] != '' %};{{ remote_logs_template['name'] }}{% endif %}
