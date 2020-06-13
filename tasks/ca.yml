@@ -20,6 +20,4 @@
   with_fileglob:
     - ca/*
   notify:
-    - Update trusted CA certificates (Debian/Ubuntu)
-    - Update trusted CA certificates (RedHat/CentOS < 7)
-    - Update trusted CA certificates (RedHat/CentOS >= 7)
+    - Update trusted CA certificates

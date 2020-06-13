@@ -1,22 +1,13 @@
 ---
-# Apt repositories
-- name: Ensure Ubuntu universe repo is enabled ({{ ansible_distribution_version }} >= 16.04)
-  apt_repository:
-    repo: "deb http://archive.ubuntu.com/ubuntu {{ ansible_distribution_release|lower }} universe"
-    state: present
-  when: ubuntu_universe_repo is defined and ubuntu_universe_repo
-
 - name: Ensure GnuPG package is installed
   apt:
     name: gnupg2
-  when: ansible_distribution == 'Ubuntu' and apt_repositories is defined
 
 - name: Add extra APT repositories
   apt_repository:
     repo: "{{ item.repo }}"
     update_cache: no
   with_items: "{{ apt_repositories }}"
-  when: ansible_distribution == 'Ubuntu' and apt_repositories is defined
 
 - name: Update Apt cache
   apt:
@@ -26,4 +17,3 @@
   until: _update_apt_cache is success
   retries: 3
   delay: 2
-  when: ansible_distribution == 'Ubuntu' and apt_repositories is defined

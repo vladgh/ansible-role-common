@@ -5,7 +5,10 @@ driver:
   name: docker
 platforms:
   - name: instance
-    image: "${MOLECULE_DISTRO:-ubuntu:latest}"
+    image: "${MOLECULE_DISTRO:-ubuntu:20.04}"
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    privileged: true
 provisioner:
   name: ansible
 lint: |

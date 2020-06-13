@@ -15,9 +15,5 @@ galaxy_info:
       versions:
         - stretch
         - buster
-    - name: EL
-      versions:
-        - 7
-        - 8
 
 dependencies: []

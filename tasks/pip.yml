@@ -1,0 +1,12 @@
+---
+- name: Ensure Pip is installed
+  package:
+    name: "{{ pip_package | default('python3-pip') }}"
+    state: present
+
+- name: Ensure pip_install_packages are installed
+  become: yes
+  pip:
+    name: "{{ pip_install_packages }}"
+    state: present
+    executable: "{{ pip_executable | default('pip3') }}"

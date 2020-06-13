@@ -25,7 +25,6 @@
 
 - name: Create mount points
   mount:
-    name: "{{ item.state | default(omit) }}"
     path: "{{ item.path }}"
     src: "{{ item.src }}"
     opts: "{{ item.opts | default(omit) }}"

@@ -4,6 +4,7 @@
   stat:
     path: /etc/systemd/logind.conf
   register: systemd_logind_conf
+  when: disable_lid_switch is defined and disable_lid_switch|bool
 
 - name: Disable lid switch
   lineinfile:
