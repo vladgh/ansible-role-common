@@ -20,6 +20,10 @@
       - name: GIT
         repo: ppa:git-core/ppa
     pip_install_packages: [pip-install-test]
+    pip_user_install_packages:
+      - user: test
+        packages: [colorama]
+        state: latest
     cron_jobs:
       - name: Testing
         minute: '0'
