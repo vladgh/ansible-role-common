@@ -111,7 +111,9 @@ Check <https://docs.ansible.com/ansible/latest/modules/pip_module.html> for more
 pip_install_packages: [ipaddress]
 # User install
 pip_user_install_packages:
-  test: [colorama]
+  - user: test
+    packages: [colorama]
+    state: latest
 ```
 
 ## Dependencies

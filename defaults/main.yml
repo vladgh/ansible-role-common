@@ -42,3 +42,4 @@ additional_packages: []
 
 # PIP
 pip_install_packages: []
+pip_user_install_packages: []
