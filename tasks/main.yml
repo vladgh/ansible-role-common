@@ -2,7 +2,10 @@
 - import_tasks: accounts.yml
 
 - import_tasks: apt.yml
-  when: ansible_distribution == 'Ubuntu' and apt_repositories is defined
+  when: >
+    ansible_distribution == 'Ubuntu' and
+    apt_repositories is defined and
+    apt_repositories
 
 - import_tasks: packages.yml
   when: additional_packages is defined and additional_packages
