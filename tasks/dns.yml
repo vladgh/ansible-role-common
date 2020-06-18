@@ -11,3 +11,4 @@
     account_api_token: "{{ cloudflare_api_token }}"
   with_items: "{{ cloudflare_dns_records }}"
   delegate_to: localhost
+  run_once: yes
