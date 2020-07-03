@@ -48,20 +48,6 @@ apt_repositories:
     repo: ppa:git-core/ppa
 ```
 
-### CloudFlare DNS
-
-Check <https://docs.ansible.com/ansible/latest/modules/cloudflare_dns_module.html> for a complete list of parameters
-
-```yaml
-cloudflare_email: "{{ vault_cloudflare_email }}"
-cloudflare_api_token: "{{ vault_cloudflare_api_token }}"
-cloudflare_dns_records:
-  - zone: example.com
-    type: A
-    record: test
-    value: 192.168.1.2
-```
-
 ### CRON Jobs
 
 Check <https://docs.ansible.com/ansible/latest/modules/cron_module.html> for a complete list of parameters
@@ -73,13 +59,6 @@ cron_jobs:
     hour: '2'
     job: docker system prune --force 2>&1 | /usr/bin/logger -t DockerCleanUp
 ```
-
-### Remote logging
-
-- `remote_logs_enabled`: Set to yes to enable remote logging (defaults to `no`)
-- `remote_logs_server`: Remote logs server (defaults to `logs.example.com`)
-- `remote_logs_port`: Remote logs port (defaults to `10514`)
-- `remote_logs_protocol`: Remote logs protocol (`tcp` or `udp`)
 
 ### Extra mount points
 

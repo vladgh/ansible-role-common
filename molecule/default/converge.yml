@@ -35,8 +35,6 @@
         opts: bind
         fstype: none
     install_ca_certificates: true
-    remote_logs_enabled: true
-    remote_logs_server: example.com
     disable_lid_switch: true
   tasks:
     - name: Include role
