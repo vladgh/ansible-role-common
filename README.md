@@ -10,7 +10,7 @@ Vlad's Common Ansible Role.
 
 ## Role Variables
 
-Available variables are listed below, along with default values (see defaults/main.yml):
+Available variables are listed below, along with default values (see defaults/main.yml)
 
 ### Users
 
