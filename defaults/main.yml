@@ -13,23 +13,6 @@ install_ca_certificates: no
 # Cronjobs
 cron_jobs: []
 
-# DNS
-cloudflare_email: ''
-cloudflare_api_token: ''
-cloudflare_dns_records: []
-
-# Remote logs
-## Set to `yes` to enable
-remote_logs_enabled: no
-remote_logs_server: ''
-remote_logs_port: 10514
-remote_logs_protocol: tcp
-remote_logs_permitted_peer: "{{ remote_logs_server }}"
-remote_logs_ca_file: "{{ ca_bundle_cert_path }}"
-remote_logs_template:
-  name: ''
-  string: ''
-
 # Miscellaneous
 ## Set to `yes` to disable lid switch on laptops.
 disable_lid_switch: no

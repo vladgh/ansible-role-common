@@ -1,5 +1,4 @@
 ---
-# Services
 - name: Restart SSH Daemon
   service:
     name: sshd
@@ -12,12 +11,5 @@
     state: restarted
   ignore_errors: "{{ ansible_virtualization_type in [\"docker\", \"VirtualPC\"] }}"
 
-- name: Restart RSysLog
-  service:
-    name: rsyslog
-    state: restarted
-  ignore_errors: "{{ ansible_virtualization_type in [\"docker\", \"VirtualPC\"] }}"
-
-# CA Certificates
 - name: Update trusted CA certificates
   command: /usr/sbin/update-ca-certificates --fresh
