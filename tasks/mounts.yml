@@ -3,7 +3,7 @@
 - name: Ensure NFS package is installed
   package:
     name: "{{ nfs_client_package_name }}"
-  when: item.fstype is defined and item.fstype == 'nfs'
+  when: item.fstype is defined and item.fstype is match('nfs')
   with_items: "{{ mount_points }}"
 
 # Make sure the RPCBind service is enabled and running if any mount point is of 'nfs' type
@@ -12,7 +12,7 @@
     name: rpcbind
     state: started
     enabled: yes
-  when: item.fstype is defined and item.fstype == 'nfs'
+  when: item.fstype is defined and item.fstype is match('nfs')
   with_items: "{{ mount_points }}"
 
 - name: Create the local directories
