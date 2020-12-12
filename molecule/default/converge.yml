@@ -34,8 +34,13 @@
         src: /boot
         opts: bind
         fstype: none
-    install_ca_certificates: true
-    disable_lid_switch: true
+    install_ca_certificates: yes
+    disable_lid_switch: yes
+    fail2ban_enabled: yes
+    unattended_upgrades_autoupdate_enabled: yes
+    unattended_upgrades_autoupdate_reboot: "true"
+    unattended_upgrades_autoupdate_mail_to: "root"
+    unattended_upgrades_autoupdate_mail_on_error: yes
   tasks:
     - name: Include role
       include_role:

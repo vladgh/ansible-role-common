@@ -24,4 +24,10 @@
 - import_tasks: mounts.yml
   when: mount_points is defined and mount_points
 
+- import_tasks: fail2ban.yml
+  when: fail2ban_enabled is defined and fail2ban_enabled
+
+- import_tasks: unattended-upgrades.yml
+  when: unattended_upgrades_autoupdate_enabled is defined and unattended_upgrades_autoupdate_enabled
+
 - import_tasks: misc.yml
