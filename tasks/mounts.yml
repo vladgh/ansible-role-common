@@ -21,6 +21,7 @@
     state: directory
     owner: "{{ item.owner | default(omit) }}"
     group: "{{ item.group | default(omit) }}"
+    mode: 0755
   with_items: "{{ mount_points }}"
 
 - name: Create mount points

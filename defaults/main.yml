@@ -26,3 +26,13 @@ additional_packages: []
 # PIP
 pip_install_packages: []
 pip_user_install_packages: []
+
+# Security
+fail2ban_enabled: no
+fail2ban_ssh_port: 22
+unattended_upgrades_autoupdate_enabled: no
+unattended_upgrades_autoupdate_reboot: "false"
+unattended_upgrades_autoupdate_reboot_time: "03:33"
+unattended_upgrades_autoupdate_mail_to: ""
+unattended_upgrades_autoupdate_mail_on_error: no
+unattended_upgrades_autoupdate_blacklist: []

@@ -11,10 +11,10 @@ jobs:
     strategy:
       matrix:
         os:
-          - ubuntu:18.04
-          - ubuntu:20.04
-          - debian:9
-          - debian:10
+          - ubuntu2004
+          - ubuntu1804
+          - debian10
+          - debian9
     steps:
     - uses: actions/checkout@v2
       with:
@@ -22,7 +22,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
     - name: Install dependencies
-      run: pip install molecule docker ansible-lint yamllint
+      run: pip install docker ansible-lint yamllint molecule molecule-docker
     - name: Test role
       run: cd vladgh.common && molecule test
       env:
