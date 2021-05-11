@@ -6,8 +6,6 @@ jobs:
   test:
     name: Test
     runs-on: ubuntu-latest
-    env:
-      ANSIBLE_ROLE_NAME: vladgh.common
     strategy:
       matrix:
         os:
@@ -23,11 +21,11 @@ jobs:
         run: |
           echo "OWNER=${{ github.repository_owner }}" >> $GITHUB_ENV
           echo "REPO=${{ github.event.repository.name }}" >> $GITHUB_ENV
-          echo "ROLE=$(echo ${{ github.event.repository.name }} | cut -d'-' -f3" >> $GITHUB_ENV
+          echo "ROLE=$(echo ${{ github.event.repository.name }} | cut -d'-' -f3)" >> $GITHUB_ENV
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          path: ${{ env.ANSIBLE_ROLE_NAME }}
+          path: ${{ env.OWNER }}.${{ env.ROLE }}
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
@@ -53,4 +51,4 @@ jobs:
       - name: Install dependencies
         run: python3 -m pip install ansible-base
       - name: Deploy
-        run: ansible-galaxy role import --api-key ${{ secrets.ANSIBLE_GALAXY_API_KEY }} ${{ github.repository_owner }} ${{ github.event.repository.name }}
+        run: ansible-galaxy role import --api-key ${{ secrets.ANSIBLE_GALAXY_API_KEY }} ${{ env.OWNER }} ${{ env.REPO }}
