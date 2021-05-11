@@ -15,5 +15,7 @@ provisioner:
   name: ansible
 lint: |
   set -e
+  ls -lah
+  cat ./molecule/.yamllint
   yamllint -c ./molecule/.yamllint .
   ansible-lint .
