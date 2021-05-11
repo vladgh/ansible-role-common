@@ -2,10 +2,6 @@ name: CI
 
 on: push
 
-defaults:
-  run:
-    working-directory: vladgh.common
-
 jobs:
   test:
     name: Test
@@ -17,11 +13,16 @@ jobs:
           - ubuntu1804
           - debian10
           - debian9
+    env:
+      ANSIBLE_ROLE_NAME: vladgh.common
+    defaults:
+      run:
+        working-directory: ${{ env.ANSIBLE_ROLE_NAME }}
     steps:
     - name: Checkout
       uses: actions/checkout@v2
       with:
-        path: vladgh.common
+        path: ${{ env.ANSIBLE_ROLE_NAME }}
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
