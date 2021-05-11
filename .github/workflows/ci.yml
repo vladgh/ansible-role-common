@@ -13,9 +13,6 @@ jobs:
           - ubuntu1804
           - debian10
           - debian9
-    defaults:
-      run:
-        working-directory: ${{ env.OWNER }}.${{ env.ROLE }}
     steps:
       - name: Set VARs
         run: |
@@ -38,6 +35,7 @@ jobs:
           PY_COLORS: 1
           ANSIBLE_FORCE_COLOR: 1
           MOLECULE_DISTRO: ${{ matrix.os }}
+        working-directory: ${{ env.OWNER }}.${{ env.ROLE }}
   deploy:
     name: Deploy
     needs: test
