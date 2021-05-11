@@ -6,6 +6,8 @@ jobs:
   test:
     name: Test
     runs-on: ubuntu-latest
+    env:
+      ANSIBLE_ROLE_NAME: vladgh.common
     strategy:
       matrix:
         os:
@@ -13,16 +15,10 @@ jobs:
           - ubuntu1804
           - debian10
           - debian9
-    env:
-      ANSIBLE_ROLE_NAME: vladgh.common
     defaults:
       run:
         working-directory: ${{ env.ANSIBLE_ROLE_NAME }}
     steps:
-    - name: Dump GitHub context
-      env:
-        GITHUB_CONTEXT: ${{ toJSON(github) }}
-      run: echo "$GITHUB_CONTEXT"
     - name: Checkout
       uses: actions/checkout@v2
       with:
@@ -30,15 +26,15 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: '3.x'
+        python-version: 3.x
     - name: Install dependencies
       run: python3 -m pip install docker ansible ansible-lint yamllint molecule molecule-docker
     - name: Test role
       run: molecule test
       env:
-        PY_COLORS: '1'
-        ANSIBLE_FORCE_COLOR: '1'
-        MOLECULE_DISTRO: "${{ matrix.os }}"
+        PY_COLORS: 1
+        ANSIBLE_FORCE_COLOR: 1
+        MOLECULE_DISTRO: ${{ matrix.os }}
   deploy:
     name: Deploy
     needs: test
@@ -48,9 +44,9 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: '3.x'
+        python-version: 3.x
     - name: Install dependencies
       run: python3 -m pip install ansible-base
     - name: Deploy
-      run: ansible-galaxy role import --api-key ${{ secrets.ANSIBLE_GALAXY_API_KEY }} $(echo ${{ github.repository }} | cut -d/ -f1) $(echo ${{ github.repository }} | cut -d/ -f2)
+      run: ansible-galaxy role import --api-key ${{ secrets.ANSIBLE_GALAXY_API_KEY }} ${{ github.repository.owner.name }} ${{ github.repository.name }}
 
