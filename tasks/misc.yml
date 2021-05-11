@@ -1,5 +1,4 @@
 ---
-# Miscelanous
 - name: Check if logind.conf exists
   stat:
     path: /etc/systemd/logind.conf

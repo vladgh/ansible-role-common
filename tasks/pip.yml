@@ -7,7 +7,7 @@
 - name: Upgrade Pip
   pip:
     name: [pip, setuptools]
-    state: latest  # noqa 403
+    state: latest  # noqa package-latest
     executable: "{{ pip_executable | default('pip3') }}"
 
 - name: Ensure Pip system wide packages are installed
