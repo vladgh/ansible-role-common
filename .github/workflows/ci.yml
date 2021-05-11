@@ -23,7 +23,7 @@ jobs:
       uses: actions/checkout@v2
       with:
         path: ${{ env.ANSIBLE_ROLE_NAME }}
-    - run: echo ${{ github.repository_owner }} ${{ fromJSON(github.repository.name) }}
+    - run: echo ${{ toJSON(github) }}
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
