@@ -13,4 +13,6 @@ platforms:
     pre_build_image: true
 provisioner:
   name: ansible
-lint: set -e && ansible-lint .
+lint: |
+  set -e
+  ansible-lint .
