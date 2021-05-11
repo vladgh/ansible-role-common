@@ -18,7 +18,7 @@ jobs:
         run: |
           echo "OWNER=${{ github.repository_owner }}" >> $GITHUB_ENV
           echo "REPO=${{ github.event.repository.name }}" >> $GITHUB_ENV
-          echo "ROLE=${REPO##*-}" >> $GITHUB_ENV
+          echo "ROLE=${REPO##\*-}" >> $GITHUB_ENV
       - name: Checkout
         uses: actions/checkout@v2
         with:
