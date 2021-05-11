@@ -23,6 +23,7 @@ jobs:
       uses: actions/checkout@v2
       with:
         path: ${{ env.ANSIBLE_ROLE_NAME }}
+    - run: echo ${{ github.repository['owner']['name'] }} ${{ github.repository['name'] }}
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
@@ -47,7 +48,6 @@ jobs:
         python-version: 3.x
     - name: Install dependencies
       run: python3 -m pip install ansible-base
-    - run: echo ${{ github.repository.owner.name }} ${{ github.repository.name }}
     - name: Deploy
       run: ansible-galaxy role import --api-key ${{ secrets.ANSIBLE_GALAXY_API_KEY }} ${{ github.repository.owner.name }} ${{ github.repository.name }}
 
