@@ -6,6 +6,13 @@ local_users: []
 # APT
 apt_repositories: []
 
+# APT Packages
+additional_packages: []
+
+# Python
+pip_install_packages: []
+pip_user_install_packages: []
+
 # CA Certificates
 ## Set to `yes` to install all certificates from `files/ca`
 install_ca_certificates: no
@@ -13,20 +20,9 @@ install_ca_certificates: no
 # Cronjobs
 cron_jobs: []
 
-# Miscellaneous
-## Set to `yes` to disable lid switch on laptops.
-disable_lid_switch: no
-
 # Mount points
 mounts: []
 systemd_mounts: []
-
-# Packages
-additional_packages: []
-
-# PIP
-pip_install_packages: []
-pip_user_install_packages: []
 
 # Security
 ## Set to `yes` to install and configure Fail2ban
@@ -40,3 +36,7 @@ unattended_upgrades_autoupdate_reboot_time: "03:33"
 unattended_upgrades_autoupdate_mail_to: ""
 unattended_upgrades_autoupdate_mail_on_error: no
 unattended_upgrades_autoupdate_blacklist: []
+
+# Miscellaneous
+## Set to `yes` to disable lid switch on laptops.
+disable_lid_switch: no
