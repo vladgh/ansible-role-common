@@ -14,11 +14,9 @@ jobs:
           - debian10
           - debian9
     steps:
-      - name: Set VARs
-        run: |
-          echo "OWNER=${{ github.repository_owner }}" >> $GITHUB_ENV
-          echo "REPO=${{ github.event.repository.name }}" >> $GITHUB_ENV
-          echo "ROLE=${REPO##\*-}" >> $GITHUB_ENV
+      - run: echo "OWNER=${{ github.repository_owner }}" >> $GITHUB_ENV
+      - run: echo "REPO=${{ github.event.repository.name }}" >> $GITHUB_ENV
+      - run: echo "ROLE=${REPO##\*-}" >> $GITHUB_ENV
       - name: Checkout
         uses: actions/checkout@v2
         with:
