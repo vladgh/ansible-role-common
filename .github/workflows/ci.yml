@@ -19,6 +19,7 @@ jobs:
       run:
         working-directory: ${{ env.ANSIBLE_ROLE_NAME }}
     steps:
+    - run: echo $GITHUB_CONTEXT
     - name: Checkout
       uses: actions/checkout@v2
       with:
