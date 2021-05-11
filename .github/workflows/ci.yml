@@ -55,4 +55,4 @@ jobs:
       - name: Install dependencies
         run: python3 -m pip install ansible-base
       - name: Deploy
-        run: ansible-galaxy role import --api-key ${{ secrets.ANSIBLE_GALAXY_API_KEY }} ${{ env.OWNER }}.${{ env.REPO }}
+        run: ansible-galaxy role import --api-key ${{ secrets.ANSIBLE_GALAXY_API_KEY }} ${{ env.OWNER }} ${{ env.REPO }}
