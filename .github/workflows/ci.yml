@@ -23,7 +23,10 @@ jobs:
       uses: actions/checkout@v2
       with:
         path: ${{ env.ANSIBLE_ROLE_NAME }}
-    - run: echo ${{ toJSON(github) }}
+    - name: Dump GitHub context
+      env:
+        GITHUB_CONTEXT: ${{ toJSON(github) }}
+      run: echo "$GITHUB_CONTEXT"
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
