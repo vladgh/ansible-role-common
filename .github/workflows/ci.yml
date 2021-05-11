@@ -14,9 +14,13 @@ jobs:
           - debian10
           - debian9
     steps:
-      - run: echo "OWNER=${{ github.repository_owner }}" >> $GITHUB_ENV
-      - run: echo "REPO=${{ github.event.repository.name }}" >> $GITHUB_ENV
-      - run: echo "ROLE=${REPO##\*-}" >> $GITHUB_ENV
+      - name: Set VARs
+        run: |
+          echo "OWNER=${{ github.repository_owner }}" >> $GITHUB_ENV
+          echo "REPO=${{ github.event.repository.name }}" >> $GITHUB_ENV
+      - name: Set VARs
+        run: |
+          echo "ROLE=${REPO##*-}" >> $GITHUB_ENV
       - name: Checkout
         uses: actions/checkout@v2
         with:
@@ -40,6 +44,10 @@ jobs:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master' && github.event_name == 'push'
     steps:
+      - name: Set VARs
+        run: |
+          echo "OWNER=${{ github.repository_owner }}" >> $GITHUB_ENV
+          echo "REPO=${{ github.event.repository.name }}" >> $GITHUB_ENV
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
@@ -47,4 +55,4 @@ jobs:
       - name: Install dependencies
         run: python3 -m pip install ansible-base
       - name: Deploy
-        run: ansible-galaxy role import --api-key ${{ secrets.ANSIBLE_GALAXY_API_KEY }} ${{ github.repository_owner }} ${{ github.event.repository.name }}
+        run: ansible-galaxy role import --api-key ${{ secrets.ANSIBLE_GALAXY_API_KEY }} ${{ env.OWNER }}.${{ env.REPO }}
