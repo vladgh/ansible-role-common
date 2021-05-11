@@ -16,3 +16,4 @@ provisioner:
 lint: |
   set -e
   yamllint -c ./molecule/.yamllint .
+  ansible-lint .
