@@ -21,8 +21,10 @@ jobs:
         path: vladgh.common
     - name: Set up Python
       uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
     - name: Install dependencies
-      run: pip install docker ansible-lint yamllint molecule molecule-docker
+      run: python3 -m pip install docker ansible ansible-lint yamllint molecule molecule-docker
     - name: Test role
       run: cd vladgh.common && molecule test
       env:
@@ -35,7 +37,9 @@ jobs:
     steps:
     - name: Set up Python
       uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
     - name: Install dependencies
-      run: pip install ansible
+      run: python3 -m pip install ansible-base
     - name: Deploy
       run: ansible-galaxy role import --api-key ${{ secrets.ANSIBLE_GALAXY_API_KEY }} vladgh ansible-role-common
