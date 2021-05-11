@@ -28,12 +28,25 @@
       - name: Testing
         minute: '0'
         job: ls -lah > /dev/null
-    mount_points:
+    mounts:
       - name: Test
-        path: /tmp/boot
+        path: /mnt/boot
         src: /boot
         opts: bind
         fstype: none
+    systemd_mounts:
+      - name: SystemD Mount Test
+        automount: no
+        what: /srv
+        where: /mnt/srv
+        options: bind
+        type: none
+      - name: SystemD Auto Mount Test
+        automount: yes
+        what: localhost:/media
+        where: /mnt/media
+        options: _netdev,auto
+        type: nfs
     install_ca_certificates: yes
     disable_lid_switch: yes
     fail2ban_enabled: yes

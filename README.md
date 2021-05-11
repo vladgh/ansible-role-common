@@ -65,12 +65,33 @@ cron_jobs:
 Check <https://docs.ansible.com/ansible/latest/modules/mount_module.html> for a complete list of parameters
 
 ```yaml
-mount_points:
+mounts:
   - name: MyBackup
     path: /data/backup
     src: UUID=1234-1234-1234-1234-1234
     fstype: ext4
     state: mounted
+```
+
+Using SystemD mount points
+
+```yaml
+systemd_mounts:
+  - name: NFS auto mount
+    automount: yes
+    what: 192.168.1.10:/media
+    where: /mnt/media
+    options: _netdev,auto
+    type: nfs
+```
+
+### Security
+
+Install Fail2ban and Unattended Upgrades
+
+```yaml
+fail2ban_enabled: yes
+unattended_upgrades_autoupdate_enabled: yes
 ```
 
 ### Miscellaneous

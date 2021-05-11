@@ -17,8 +17,9 @@ cron_jobs: []
 ## Set to `yes` to disable lid switch on laptops.
 disable_lid_switch: no
 
-# Mounts
-mount_points: []
+# Mount points
+mounts: []
+systemd_mounts: []
 
 # Packages
 additional_packages: []
@@ -28,8 +29,11 @@ pip_install_packages: []
 pip_user_install_packages: []
 
 # Security
+## Set to `yes` to install and configure Fail2ban
 fail2ban_enabled: no
+## SSH port for the fail2ban configuration
 fail2ban_ssh_port: 22
+## Set to `yes` to enable unattended upgrades
 unattended_upgrades_autoupdate_enabled: no
 unattended_upgrades_autoupdate_reboot: "false"
 unattended_upgrades_autoupdate_reboot_time: "03:33"
