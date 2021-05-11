@@ -13,7 +13,4 @@ platforms:
     pre_build_image: true
 provisioner:
   name: ansible
-lint: |
-  set -e
-  yamllint -c ./molecule/.yamllint .
-  ansible-lint .
+lint: set -euo pipefail && yamllint -c ./molecule/.yamllint . && ansible-lint .
