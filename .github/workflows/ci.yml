@@ -4,7 +4,7 @@ on: push
 
 defaults:
   run:
-    working-directory: 'vladgh.common'
+    working-directory: vladgh.common
 
 jobs:
   test:
@@ -20,6 +20,8 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
+      with:
+        path: vladgh.common
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
